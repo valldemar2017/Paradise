@@ -322,6 +322,7 @@
 		if("dance")
 			if(!restrained())
 				message = "<B>[src]</B> радостно танцует!"
+				spin(20,1)
 				m_type = 1
 
 		if("jump")
