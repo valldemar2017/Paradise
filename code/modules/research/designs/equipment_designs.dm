@@ -290,3 +290,32 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_METAL = 5000, MAT_PLASMA = 2500, MAT_TITANIUM = 500, MAT_BLUESPACE = 500)
 	category = list("Equipment")
+/datum/design/holosign_creator_engineering
+	name = "Engineering holobarrier projector"
+	desc = "A holographic projector that creates holographic engineering barriers."
+	id="engineering_holobarrier_projector"
+	req_tech = list("engineering" = 5,"magnets"=7,"programming" = 4)
+	build_path = /obj/item/holosign_creator/engineering
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 3000,MAT_GLASS=2000,MAT_PLASMA = 2000) 	//MAT_BLUESPACE = 2000
+	category = list("Equipment")
+
+/datum/design/holosign_creator_atmos
+	name = "ATMOS holofan projector"
+	desc = "A holographic projector that creates holographic barriers that prevent changes in atmosphere conditions."
+	id="holosign_creator_atmos"
+	req_tech = list("engineering" = 4,"bluespace" = 7, "magnets"=7,"programming" = 4) //Why "bluespace" is 7? How simple hologram can stop burning plasma? huh? yeah, It's bluespace!
+	build_path = /obj/item/holosign_creator/atmos
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 3000,MAT_GLASS=2000,MAT_BLUESPACE = 2000,MAT_PLASMA = 2000) 	//MAT_BLUESPACE = 2000
+	category = list("Equipment")
+/datum/design/holosign_creator_security
+	name = "Security holobarrier projector"
+	desc = "A holographic projector that creates holographic security barriers."
+	id="holosign_creator_security"
+	req_tech = list("engineering" = 5,"magnets"=7,"programming" = 4)
+	build_path=/obj/item/holosign_creator/security
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 3000,MAT_GLASS=2000,MAT_PLASMA = 2000)
+	category = list("Equipment")
+
