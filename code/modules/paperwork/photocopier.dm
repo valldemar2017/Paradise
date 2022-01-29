@@ -65,15 +65,17 @@
 					break
 
 				if(GLOB.copier_items_printed >= GLOB.copier_max_items) //global vars defined in misc.dm
-					if(prob(10))
-						visible_message("<span class='warning'>The printer screen reads \"PC LOAD LETTER\".</span>")
-					else
-						visible_message("<span class='warning'>The printer screen reads \"PHOTOCOPIER NETWORK OFFLINE, PLEASE CONTACT SYSTEM ADMINISTRATOR\".</span>")
-					if(!GLOB.copier_items_printed_logged)
-						message_admins("Photocopier cap of [GLOB.copier_max_items] papers reached, all photocopiers are now disabled. This may be the cause of any lag.")
-						GLOB.copier_items_printed_logged = TRUE
+					// if(prob(10))
+					// 	visible_message("<span class='warning'>The printer screen reads \"PC LOAD LETTER\".</span>")
+					// else
+					// 	visible_message("<span class='warning'>The printer screen reads \"PHOTOCOPIER NETWORK OFFLINE, PLEASE CONTACT SYSTEM ADMINISTRATOR\".</span>")
+					// if(!GLOB.copier_items_printed_logged)
+					// 	message_admins("Photocopier cap of [GLOB.copier_max_items] papers reached, all photocopiers are now disabled. This may be the cause of any lag.")
+					// 	GLOB.copier_items_printed_logged = TRUE
+					// break
+					GLOB.copier_server_is_downed=TRUE
+					addtimer(CALLBACK(src,.proc/ResetBuffer), GLOB.copier_server_recovery,null)
 					break
-
 				if(emag_cooldown > world.time)
 					return
 
@@ -107,15 +109,17 @@
 					break
 
 				if(GLOB.copier_items_printed >= GLOB.copier_max_items) //global vars defined in misc.dm
-					if(prob(10))
-						visible_message("<span class='warning'>The printer screen reads \"PC LOAD LETTER\".</span>")
-					else
-						visible_message("<span class='warning'>The printer screen reads \"PHOTOCOPIER NETWORK OFFLINE, PLEASE CONTACT SYSTEM ADMINISTRATOR\".</span>")
-					if(!GLOB.copier_items_printed_logged)
-						message_admins("Photocopier cap of [GLOB.copier_max_items] papers reached, all photocopiers are now disabled. This may be the cause of any lag.")
-						GLOB.copier_items_printed_logged = TRUE
-					break
-
+					// if(prob(10))
+					// 	visible_message("<span class='warning'>The printer screen reads \"PC LOAD LETTER\".</span>")
+					// else
+					// 	visible_message("<span class='warning'>The printer screen reads \"PHOTOCOPIER NETWORK OFFLINE, PLEASE CONTACT SYSTEM ADMINISTRATOR\".</span>")
+					// if(!GLOB.copier_items_printed_logged)
+					// 	message_admins("Photocopier cap of [GLOB.copier_max_items] papers reached, all photocopiers are now disabled. This may be the cause of any lag.")
+					// 	GLOB.copier_items_printed_logged = TRUE
+					// break
+					GLOB.copier_server_is_downed = TRUE
+					addtimer(CALLBACK(src,.proc/ResetBuffer), GLOB.copier_server_recovery,null)
+					return
 				if(emag_cooldown > world.time)
 					return
 
@@ -432,7 +436,10 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "tonercartridge"
 	var/toner_amount = 30
-
+/obj/machinery/photocopier/proc/ResetBuffer()
+	GLOB.copier_items_printed=0
+	GLOB.copier_server_is_downed=FALSE
+	to_chat(src,"<span class='warning'> Station printing buffer was successfully self-cleaned!")
 #undef EMAG_DELAY
 #undef MODE_COPY
 #undef MODE_PRINT

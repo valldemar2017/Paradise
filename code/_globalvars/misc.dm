@@ -85,8 +85,8 @@ GLOBAL_VAR_INIT(gametime_offset, 432000) // 12:00 in seconds
 GLOBAL_VAR_INIT(copier_items_printed, 0)
 GLOBAL_VAR_INIT(copier_max_items, 300)
 GLOBAL_VAR_INIT(copier_items_printed_logged, FALSE)
-
-
+GLOBAL_VAR_INIT(copier_server_is_downed, FALSE)
+GLOBAL_VAR_INIT(copier_server_recovery, 3600)
 GLOBAL_VAR(map_name) // Self explanatory
 
 GLOBAL_DATUM_INIT(data_core, /datum/datacore, new) // Station datacore, manifest, etc

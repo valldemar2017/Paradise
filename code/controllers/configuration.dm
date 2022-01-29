@@ -843,6 +843,8 @@
 					config.robot_delay = value
 				if("monkey_delay")
 					config.monkey_delay = value
+				if("copier_restart_delay")
+					GLOB.copier_server_recovery=value
 				if("alien_delay")
 					config.alien_delay = value
 				if("slime_delay")
