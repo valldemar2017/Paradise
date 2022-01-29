@@ -322,6 +322,15 @@
 	build_path = /obj/item/circuitboard/rdserver
 	category = list("Research Machinery")
 
+/datum/design/photocopier
+	name =  "Circuit board (Photocopier)"
+	id="photocopier"
+	desc="Allows for the construction of circuit boards used to build an Photocopier."
+	req_tech = list("programming" = 2)
+	build_type = IMPRINTER
+	materials = list(MAT_GLASS=1000)
+	build_path = /obj/item/circuitboard/copier
+	category = list("Misc. Machinery")
 /datum/design/gibber
 	name = "Machine Design (Gibber Board)"
 	desc = "The circuit board for a gibber."

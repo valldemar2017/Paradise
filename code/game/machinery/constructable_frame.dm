@@ -222,6 +222,12 @@ micro-manipulator, glass sheets, beaker, Microlaser, matter bin, power cells.
 Note: Once everything is added to the public areas, will add MAT_METAL and MAT_GLASS to circuit boards since autolathe won't be able
 to destroy them and players will be able to make replacements.
 */
+/obj/item/circuitboard/copier
+	name= "Circuit board (Photocopier)"
+	board_type = "machine"
+	origin_tech = "programming=1"
+	build_path=/obj/machinery/photocopier
+	req_components = list()
 /obj/item/circuitboard/vendor
 	name = "circuit board (Booze-O-Mat Vendor)"
 	board_type = "machine"
