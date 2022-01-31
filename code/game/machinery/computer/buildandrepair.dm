@@ -75,6 +75,18 @@
 	build_path = /obj/machinery/computer/security
 	origin_tech = "programming=2;combat=2"
 
+/obj/item/circuitboard/camera
+	name = "Circuit board (Camera Monitor)"
+	build_path = /obj/machinery/computer/security
+	origin_tech = "programming=2;combat=2"
+	var/list/net=list()
+/obj/item/circuitboard/camera/attackby(obj/item/I as obj, mob/user as mob, params)
+	if(istype(I,/obj/item/multitool))
+		var/input = strip_html(input(usr, "Which networks would you like to connect this camera monitor to? Seperate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Set Network", "SS13"))
+		net=splittext(input, ",")
+		return
+	return ..()
+
 /obj/item/circuitboard/camera/telescreen
 	name = "Circuit board (Telescreen)"
 	build_path = /obj/machinery/computer/security/telescreen
@@ -536,6 +548,10 @@
 					var/obj/machinery/computer/supplycomp/SC = B
 					var/obj/item/circuitboard/supplycomp/C = circuit
 					SC.can_order_contraband = C.contraband_enabled
+				if(istype(circuit,/obj/item/circuitboard/camera))
+					var/obj/machinery/computer/security/SC=B
+					var/obj/item/circuitboard/camera/C = circuit
+					SC.network=C.net
 				qdel(src)
 				return
 	if(user.a_intent == INTENT_HARM)
