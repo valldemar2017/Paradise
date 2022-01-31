@@ -1485,6 +1485,7 @@
 #include "code\modules\events\apc_overload.dm"
 #include "code\modules\events\apc_short.dm"
 #include "code\modules\events\blob.dm"
+#include "code\modules\events\payday.dm"
 #include "code\modules\events\brand_intelligence.dm"
 #include "code\modules\events\carp_migration.dm"
 #include "code\modules\events\communications_blackout.dm"
