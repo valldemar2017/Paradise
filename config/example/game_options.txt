@@ -33,6 +33,9 @@ ALIEN_DELAY 1.5
 SLIME_DELAY 1.5
 ANIMAL_DELAY 2.5
 
+## Copier recovery delay
+copier_restart_delay 1800
+
 ## Comment for "normal" explosions, which ignore obstacles
 ## Uncomment for explosions that react to doors and walls
 REACTIONARY_EXPLOSIONS
