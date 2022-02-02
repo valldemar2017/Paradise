@@ -395,6 +395,12 @@
 	icon = "warpsurf"
 	desc = "Welcome to the club, buddy!"
 
+/datum/barsign/rv666
+	name = "RV666"
+	icon = "rv666"
+	desc = "Доброго времени суток, профессиональные работяги"
+
+
 
 /datum/barsign/hiddensigns
 	hidden = 1
