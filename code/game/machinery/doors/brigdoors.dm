@@ -310,7 +310,7 @@
 	data["crimes"] = crimes
 	data["brigged_by"] = officer
 	data["time_set"] = seconds_to_clock(timetoset / 10)
-	data["time_left"] = seconds_to_clock(timeleft())
+	data["time_left"] =  "[add_zero(num2text((timeleft() / 60/60) % 60), 2)]:[add_zero(num2text((timeleft() / 60) % 60), 2)]"
 	data["timing"] = timing
 	data["isAllowed"] = allowed(user)
 	data["prisoner_name"] = prisoner_name
@@ -347,7 +347,7 @@
 			prisoner_charge = input("Prisoner Charge:", name, prisoner_charge) as text|null
 		if("prisoner_time")
 			prisoner_time = input("Prisoner Time (in minutes):", name, prisoner_time) as num|null
-			prisoner_time = min(max(round(prisoner_time), 0), 60)
+			prisoner_time = min(max(round(prisoner_time), 0), 240)
 		if("start")
 			if(!prisoner_name || !prisoner_charge || !prisoner_time)
 				return FALSE
@@ -406,7 +406,7 @@
 	if(timing)
 		var/disp1 = id
 		var/timeleft = timeleft()
-		var/disp2 = "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
+		var/disp2 = "[add_zero(num2text((timeleft / 60/60) % 60), 2)]:[add_zero(num2text((timeleft / 60) % 60), 2)]"
 		if(length(disp2) > CHARS_PER_LINE)
 			disp2 = "Error"
 		update_display(disp1, disp2)
