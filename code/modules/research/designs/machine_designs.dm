@@ -420,7 +420,24 @@
 	materials = list(MAT_GLASS = 1000)
 	build_path = /obj/item/circuitboard/microwave
 	category = list("Misc. Machinery")
-
+/datum/design/washing_machine
+	name ="Machine Board (Washing Machine)"
+	desc = "The circuit board for a Washing Machine."
+	id = "washingmachine"
+	req_tech = list("programming" = 2)
+	build_type = IMPRINTER
+	materials = list(MAT_GLASS = 1000)
+	build_path = /obj/machinery/washing_machine
+	category = list("Misc. Machinery")
+/datum/design/bookbinder
+	name ="Machine Board (Book Binder)"
+	desc = "The circuit board for a Book Binder."
+	id = "bookbinder"
+	req_tech = list("programming" = 2)
+	build_type = IMPRINTER
+	materials = list(MAT_GLASS = 1000)
+	build_path = /obj/machinery/bookbinder
+	category = list("Misc. Machinery")
 /datum/design/oven
 	name = "Machine Board (Oven)"
 	desc = "The circuit board for an Oven."

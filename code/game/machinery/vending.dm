@@ -1895,6 +1895,7 @@
 	premium = list(/obj/item/clothing/under/suit_jacket/checkered = 1,
 				   /obj/item/clothing/head/mailman = 1,
 				   /obj/item/clothing/under/rank/mailman = 1,
+				   /obj/item/clothing/suit/hooded/salmon_costume=1,
 				   /obj/item/clothing/suit/jacket/leather = 1,
 				   /obj/item/clothing/under/pants/mustangjeans = 1)
 
