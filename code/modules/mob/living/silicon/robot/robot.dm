@@ -332,6 +332,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module_sprites["Basic"] = "robot_old"
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "Standard"
+			module_sprites["Kitty"]="kittybot2-gen"
 			module_sprites["Noble-STD"] = "Noble-STD"
 
 		if("Service")
@@ -341,6 +342,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Miss"]="missm_service"
 			module_sprites["Maid"]="robomaid_sd"
+			module_sprites["Kitty"]="kittybot2-serv"
 			module_sprites["Bro"] = "Brobot"
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
@@ -373,6 +375,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module_sprites["Surgeon"] = "surgeon"
 			module_sprites["Maid"]="robomaid_med"
 			module_sprites["Qualified Doctor"]="qualified_doctor"
+			module_sprites["Kitty"]="kittybot2-medi"
 			module_sprites["Miss"]="missm_med"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
@@ -399,6 +402,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module_sprites["Basic"] = "secborg"
 			module_sprites["Maid"]="robomaid_sec"
 			module_sprites["Miss"]="missm_security"
+			module_sprites["Kitty"]="kittybot2-sec"
 			module_sprites["Red Knight"] = "Security"
 			module_sprites["Black Knight"] = "securityrobot"
 			module_sprites["Bloodhound"] = "bloodhound"
@@ -415,6 +419,7 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Maid"]="robomaid_eng"
 			module_sprites["Miss"]="missm_eng"
+			module_sprites["Kitty"]="kittybot2-engi"
 			module_sprites["Antique"] = "engineerrobot"
 			module_sprites["Landmate"] = "landmate"
 			module_sprites["Standard"] = "Standard-Engi"
@@ -442,7 +447,9 @@ GLOBAL_LIST_INIT(robot_verbs_default, list(
 
 		if("Combat") // Gamma ERT
 			module = new /obj/item/robot_module/combat(src)
-			icon_state = "ertgamma"
+			module_sprites["Default"] = "ertgamma"
+			module_sprites["Kitty"] = "kittybot2-centcomm"
+			//icon_state = "ertgamma"
 			status_flags &= ~CANPUSH
 
 		if("Hunter")

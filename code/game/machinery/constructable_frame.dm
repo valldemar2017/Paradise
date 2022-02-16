@@ -460,7 +460,18 @@ to destroy them and players will be able to make replacements.
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/manipulator = 1)
-
+/obj/item/circuitboard/washing_machine
+	name = "circuit board (Washing Machine)"
+	build_path = /obj/machinery/washing_machine
+	board_type = "machine"
+	origin_tech = "programming=2"
+	req_components = list()
+/obj/item/circuitboard/book_binder
+	name="circuit board (Book Binder)"
+	build_path = /obj/machinery/bookbinder
+	board_type = "machine"
+	origin_tech = "programming=2"
+	req_components = list()
 /obj/item/circuitboard/tesla_coil
 	name = "circuit board (Tesla Coil)"
 	build_path = /obj/machinery/power/tesla_coil
