@@ -34,7 +34,7 @@
 	origin_tech = "materials=2;engineering=3"
 	actions_types = list(/datum/action/item_action/toggle)
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
-	flags_cover = MASKCOVERSEYES
+	flags_cover = MASKCOVERSEYES|MASKCOVERSMOUTH
 	visor_flags_inv = HIDEEYES
 	resistance_flags = FIRE_PROOF
 
@@ -101,7 +101,7 @@
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	strip_delay = 60
-
+	flags_cover = MASKCOVERSEYES
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
 	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
@@ -109,6 +109,7 @@
 	item_state = "clown_hat"
 	flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | BLOCKHAIR
 	resistance_flags = FLAMMABLE
+	flags_cover = MASKCOVERSEYES
 	dog_fashion = /datum/dog_fashion/head/clown
 
 /obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
@@ -151,13 +152,13 @@
 	icon_state = "mime"
 	item_state = "mime"
 	resistance_flags = FLAMMABLE
-
+	flags_cover = MASKCOVERSEYES
 /obj/item/clothing/mask/gas/mime/wizard
 	name = "magical mime mask"
 	desc = "A mime mask glowing with power. Its eyes gaze deep into your soul."
 	flags_inv = HIDEEARS | HIDEEYES
 	magical = TRUE
-
+	flags_cover = MASKCOVERSEYES
 /obj/item/clothing/mask/gas/mime/nodrop
 	flags = NODROP
 
