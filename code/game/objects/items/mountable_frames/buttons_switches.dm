@@ -21,3 +21,13 @@
 /obj/item/mounted/frame/light_switch/do_build(turf/on_wall, mob/user)
 	new /obj/machinery/light_switch(get_turf(user), get_dir(user, on_wall))
 	qdel(src)
+/obj/item/mounted/frame/tint_switch
+	name = "Tint control button switch"
+	desc ="Used for repairing or building window tint switches"
+	icon = 'icons/obj/power.dmi'
+	icon_state = "light-p"
+	mount_reqs = list("simfloor", "nospace")
+	sheets_refunded = 1
+/obj/item/mounted/frame/tint_switch/do_build(turf/on_wall, mob/user)
+	new /obj/machinery/button/windowtint(get_turf(user), get_dir(user, on_wall))
+	qdel(src)

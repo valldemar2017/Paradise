@@ -37,6 +37,7 @@ GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 	/obj/item/stack/sheet/glass,
 	/obj/item/stack/sheet/rglass,
+	/obj/item/stack/sheet/tinted_glass,
 	/obj/item/stack/sheet/plasmaglass,
 	/obj/item/stack/sheet/plasmarglass,
 	/obj/item/stack/sheet/titaniumglass,

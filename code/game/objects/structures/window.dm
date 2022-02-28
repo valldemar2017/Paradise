@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(wcCommon, pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e",
 	var/real_explosion_block	//ignore this, just use explosion_block
 	var/breaksound = "shatter"
 	var/hitsound = 'sound/effects/Glasshit.ogg'
-
+	var/old_color
 /obj/structure/window/examine(mob/user)
 	. = ..()
 	if(reinf)
@@ -525,15 +525,20 @@ GLOBAL_LIST_INIT(wcCommon, pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e",
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	var/id
-
+/obj/structure/window/reinforced/polarized/multitool_act(mob/living/user, obj/item/I)
+	var/new_id = input("Please enter a new ID","Button ID",null,null) as null|num
+	id=min(max(new_id,0),100)
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
-		animate(src, color="#FFFFFF", time=5)
+		animate(src, color = "#FFFFFF", time = 5)
+		if(!old_color)
+			old_color = "#FFFFFF"
+		animate(src, color = old_color, time=5)
 		set_opacity(0)
 	else
+		old_color = color
 		animate(src, color="#222222", time=5)
 		set_opacity(1)
-
 /obj/machinery/button/windowtint
 	name = "window tint control"
 	icon = 'icons/obj/power.dmi'
@@ -543,6 +548,20 @@ GLOBAL_LIST_INIT(wcCommon, pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e",
 	var/id = 0
 	var/active = 0
 
+/obj/machinery/button/windowtint/New(turf/loc, var/w_dir=null)
+	..()
+	switch(w_dir)
+		if(NORTH)
+			pixel_y = 25
+		if(SOUTH)
+			pixel_y = -25
+		if(EAST)
+			pixel_x = 25
+		if(WEST)
+			pixel_x = -25
+
+	spawn(5)
+	update_icon()
 /obj/machinery/button/windowtint/attack_hand(mob/user)
 	if(..())
 		return 1
@@ -560,6 +579,15 @@ GLOBAL_LIST_INIT(wcCommon, pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e",
 			spawn(0)
 				W.toggle()
 				return
+// /obj/machinery/button/windowtint/attacked_by(obj/item/I, mob/living/user)
+// 	. = ..()
+// 	var/new_id = input("Please enter a new ID","Button ID",null,null) as null|num
+// 	id=min(max(new_id,0),100)
+
+/obj/machinery/button/windowtint/multitool_act(mob/living/user, obj/item/I)
+	.=TRUE
+	var/new_id = input("Please enter a new ID","Button ID",null,null) as num|null
+	id=min(max(new_id,0),100)
 
 /obj/machinery/button/windowtint/power_change()
 	..()

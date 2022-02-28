@@ -97,7 +97,24 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 	full_window = /obj/structure/window/full/reinforced
 	merge_type = /obj/item/stack/sheet/rglass
 	point_value = 4
-
+/obj/item/stack/sheet/tinted_glass
+	name="electrochromic glass"
+	desc="Glass which adjusts its tint with voltage"
+	singular_name = "electrochromic glass sheet"
+	icon_state="sheet-rglass"
+	materials = list(MAT_METAL=MINERAL_MATERIAL_AMOUNT/2, MAT_GLASS=MINERAL_MATERIAL_AMOUNT)
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 70, "acid" = 100)
+	resistance_flags = ACID_PROOF
+	origin_tech = "materials=3"
+	created_window = /obj/structure/window/reinforced/polarized
+	merge_type = /obj/item/stack/sheet/tinted_glass
+	point_value = 4
+GLOBAL_LIST_INIT(tinted_glass_recipes, list ( \
+	new/datum/stack_recipe/window("directional window", /obj/structure/window/reinforced/polarized, time = 0, on_floor = TRUE, window_checks = TRUE), \
+))
+/obj/item/stack/sheet/tinted_glass/New(loc, new_amount, merge)
+	recipes=GLOB.tinted_glass_recipes
+	..()
 /obj/item/stack/sheet/rglass/cyborg
 	materials = list()
 	is_cyborg = 1
