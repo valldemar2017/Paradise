@@ -1051,42 +1051,50 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, list(/obj/machinery/atmospherics/unary/ven
 	return 1
 
 /mob/living/carbon/proc/selfFeed(var/obj/item/reagent_containers/food/toEat, fullness)
-	if(ispill(toEat))
-		to_chat(src, "<span class='notify'>You [toEat.apply_method] [toEat].</span>")
+	if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
+		if(ispill(toEat))
+			to_chat(src, "<span class='notify'>You [toEat.apply_method] [toEat].</span>")
+		else
+			if(toEat.junkiness && satiety < -150 && nutrition > NUTRITION_LEVEL_STARVING + 50 )
+				to_chat(src, "<span class='notice'>You don't feel like eating any more junk food at the moment.</span>")
+				return 0
+			if(fullness <= 50)
+				to_chat(src, "<span class='warning'>You hungrily chew out a piece of [toEat] and gobble it!</span>")
+			else if(fullness > 50 && fullness < 150)
+				to_chat(src, "<span class='notice'>You hungrily begin to eat [toEat].</span>")
+			else if(fullness > 150 && fullness < 500)
+				to_chat(src, "<span class='notice'>You take a bite of [toEat].</span>")
+			else if(fullness > 500 && fullness < 600)
+				to_chat(src, "<span class='notice'>You unwillingly chew a bit of [toEat].</span>")
+			else if(fullness > (600 * (1 + overeatduration / 2000)))	// The more you eat - the more you can eat
+				to_chat(src, "<span class='warning'>You cannot force any more of [toEat] to go down your throat.</span>")
+				return 0
+		return 1
 	else
-		if(toEat.junkiness && satiety < -150 && nutrition > NUTRITION_LEVEL_STARVING + 50 )
-			to_chat(src, "<span class='notice'>You don't feel like eating any more junk food at the moment.</span>")
-			return 0
-		if(fullness <= 50)
-			to_chat(src, "<span class='warning'>You hungrily chew out a piece of [toEat] and gobble it!</span>")
-		else if(fullness > 50 && fullness < 150)
-			to_chat(src, "<span class='notice'>You hungrily begin to eat [toEat].</span>")
-		else if(fullness > 150 && fullness < 500)
-			to_chat(src, "<span class='notice'>You take a bite of [toEat].</span>")
-		else if(fullness > 500 && fullness < 600)
-			to_chat(src, "<span class='notice'>You unwillingly chew a bit of [toEat].</span>")
-		else if(fullness > (600 * (1 + overeatduration / 2000)))	// The more you eat - the more you can eat
-			to_chat(src, "<span class='warning'>You cannot force any more of [toEat] to go down your throat.</span>")
-			return 0
-	return 1
+		to_chat(src,"<span class='warning'>You should remove your mask first.</span>")
 
 /mob/living/carbon/proc/selfDrink(var/obj/item/reagent_containers/food/drinks/toDrink, mob/user)
-	return 1
+	if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
+		to_chat(src,"<span class='warning'>You should remove  mask first.</span>")
+		return 1
 
 /mob/living/carbon/proc/forceFed(var/obj/item/reagent_containers/food/toEat, mob/user, fullness)
-	if(ispill(toEat) || fullness <= (600 * (1 + overeatduration / 1000)))
-		if(!toEat.instant_application)
-			visible_message("<span class='warning'>[user] attempts to force [src] to [toEat.apply_method] [toEat].</span>")
-	else
-		visible_message("<span class='warning'>[user] cannot force anymore of [toEat] down [src]'s throat.</span>")
-		return 0
-	if(!toEat.instant_application)
-		if(!do_mob(user, src))
+	if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
+		if(ispill(toEat) || fullness <= (600 * (1 + overeatduration / 1000)))
+			if(!toEat.instant_application)
+				visible_message("<span class='warning'>[user] attempts to force [src] to [toEat.apply_method] [toEat].</span>")
+		else
+			visible_message("<span class='warning'>[user] cannot force anymore of [toEat] down [src]'s throat.</span>")
 			return 0
-	forceFedAttackLog(toEat, user)
-	visible_message("<span class='warning'>[user] forces [src] to [toEat.apply_method] [toEat].</span>")
-	return 1
-
+		if(!toEat.instant_application)
+			if(!do_mob(user, src))
+				return 0
+		forceFedAttackLog(toEat, user)
+		visible_message("<span class='warning'>[user] forces [src] to [toEat.apply_method] [toEat].</span>")
+		return 1
+	else
+		to_chat(user,"<span class='warning'>You should remove [src] mask first.</span>")
+		return 0
 /mob/living/carbon/proc/forceFedAttackLog(var/obj/item/reagent_containers/food/toEat, mob/user)
 	add_attack_logs(user, src, "Fed [toEat]. Reagents: [toEat.reagents.log_list(toEat)]", toEat.reagents.harmless_helper() ? ATKLOG_ALMOSTALL : null)
 

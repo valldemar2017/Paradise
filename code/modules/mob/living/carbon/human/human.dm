@@ -1730,9 +1730,14 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 			to_chat(src, "Where do you intend to put \the [src]? You don't have a mouth!")
 			return 0
 		else
-			to_chat(src, "<span class='notice'>You pour a bit of liquid from [toDrink] into your connection port.</span>")
+			if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
+				to_chat(src, "<span class='notice'>You pour a bit of liquid from [toDrink] into your connection port.</span>")
 	else
-		to_chat(src, "<span class='notice'>You swallow a gulp of [toDrink].</span>")
+		if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
+			to_chat(src, "<span class='notice'>You swallow a gulp of [toDrink].</span>")
+		else
+			to_chat(src, "<span class='warning'>You should remove your mask!</span>")
+			return 0
 	return 1
 
 /mob/living/carbon/human/can_track(mob/living/user)
