@@ -614,7 +614,20 @@
 	materials = list(MAT_METAL = 400, MAT_GLASS = 250)
 	build_path = /obj/item/camera_assembly
 	category = list("initial", "Construction")
-
+/datum/design/tint_control
+	name = "window tint control"
+	id="tint_control"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 500)
+	build_path = /obj/item/mounted/frame/tint_switch
+	category = list("initial", "Construction")
+/datum/design/polarized_glass
+	name="electrochromic glass"
+	id="polarized_glass"
+	build_type = AUTOLATHE
+	materials = list(MAT_METAL = 1000, MAT_GLASS = MINERAL_MATERIAL_AMOUNT)
+	build_path=/obj/item/stack/sheet/tinted_glass
+	category = list("initial", "Construction")
 /datum/design/newscaster_frame
 	name = "Newscaster Frame"
 	id = "newscaster_frame"
