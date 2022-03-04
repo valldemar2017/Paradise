@@ -1736,7 +1736,7 @@ Eyes need to have significantly high darksight to shine unless the mob has the X
 		if(!((head && (head.flags_cover & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH) && !wear_mask.mask_adjusted)))
 			to_chat(src, "<span class='notice'>You swallow a gulp of [toDrink].</span>")
 		else
-			to_chat(src, "<span class='warning'>You should remove your mask!</span>")
+			to_chat(src, "<span class='warning'>You need to take off your mask first!</span>")
 			return 0
 	return 1
 
