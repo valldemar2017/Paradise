@@ -37,6 +37,7 @@
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
 	id = /obj/item/card/id/hos
 	suit_store = /obj/item/gun/energy/gun
+	l_pocket = /obj/item/lighter/zippo/head_security
 	pda = /obj/item/pda/heads/hos
 	l_hand = /obj/item/storage/lockbox/sibyl_system_mod
 	backpack_contents = list(

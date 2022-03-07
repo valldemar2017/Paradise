@@ -35,6 +35,7 @@
 	l_ear = /obj/item/radio/headset/heads/ce
 	id = /obj/item/card/id/ce
 	l_pocket = /obj/item/t_scanner
+	r_pocket = /obj/item/lighter/zippo/head_ce
 	pda = /obj/item/pda/heads/ce
 	backpack_contents = list(
 		/obj/item/melee/classic_baton/telescopic = 1
