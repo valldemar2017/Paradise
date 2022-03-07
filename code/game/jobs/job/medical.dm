@@ -29,6 +29,7 @@
 	suit = /obj/item/clothing/suit/storage/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/brown
 	l_ear = /obj/item/radio/headset/heads/cmo
+	l_pocket = /obj/item/lighter/zippo/head_cmo
 	id = /obj/item/card/id/cmo
 	suit_store = /obj/item/flashlight/pen
 	l_hand = /obj/item/storage/firstaid/doctor
