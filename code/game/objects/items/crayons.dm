@@ -5,7 +5,7 @@
 /obj/item/toy/crayon
 	name = "crayon"
 	desc = "A colourful crayon. Looks tasty. Mmmm..."
-	icon = 'icons/obj/crayons.dmi'
+	icon  = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_BELT | SLOT_EARS
@@ -14,9 +14,10 @@
 	var/colour = COLOR_RED
 	var/drawtype = "rune"
 	var/list/graffiti = list("body","amyjon","face","matt","revolution","engie","guy","end","dwarf","uboa","up","down","left","right","heart","borgsrogue","voxpox","shitcurity","catbeast","hieroglyphs1","hieroglyphs2","hieroglyphs3","security","syndicate1","syndicate2","nanotrasen","lie","valid","arrowleft","arrowright","arrowup","arrowdown","chicken","hailcrab","brokenheart","peace","scribble","scribble2","scribble3","skrek","squish","tunnelsnake","yip","youaredead")
-	var/list/letters = list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+	var/list/letters = list("а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я")
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0
+	var/text_buffer = ""
 	var/colourName = "red" //for updateIcon purposes
 	var/dat = {"<meta charset="UTF-8">"}
 	var/busy = FALSE
@@ -38,6 +39,9 @@
 	dat += "<center><h2>Currently selected: [drawtype]</h2><br>"
 	dat += "<a href='?src=[UID()];type=random_letter'>Random letter</a><a href='?src=[UID()];type=letter'>Pick letter</a>"
 	dat += "<hr>"
+	dat += "<h3>Text:</h3><br>"
+	dat+="<center>Current text: [text_buffer]<br>"
+	dat += "<a href='?src=[UID()];type=enter_text'>Enter text</a>"
 	dat += "<h3>Runes:</h3><br>"
 	dat += "<a href='?src=[UID()];type=random_rune'>Random rune</a>"
 	for(var/i = 1; i <= 8; i++)
@@ -72,18 +76,31 @@
 			temp = "rune[rand(1,10)]"
 		if("random_graffiti")
 			temp = pick(graffiti)
+		if("enter_text")
+			var/txt = input(usr, "Choose what to write.", "Scribbles", text_buffer) as null|text
+			if(isnull(txt))
+				return
+			txt = crayon_text_strip(txt)
+			if(text_buffer == txt)
+				return // No valid changes.
+			text_buffer = txt
 		else
 			temp = href_list["type"]
 	if((usr.restrained() || usr.stat || !usr.is_in_active_hand(src)))
 		return
+	if(length(text_buffer))
+		temp=text_buffer[1]
 	drawtype = temp
+
 	update_window(usr)
 
-/obj/item/toy/crayon/afterattack(atom/target, mob/user, proximity)
+/obj/item/toy/crayon/afterattack(atom/target, mob/user, proximity,params)
 	if(!proximity) return
 	if(busy) return
 	if(is_type_in_list(target,validSurfaces))
 		var/temp = "rune"
+		if(length(text_buffer))
+			drawtype = text_buffer[1]
 		if(letters.Find(drawtype))
 			temp = "letter"
 		else if(graffiti.Find(drawtype))
@@ -92,14 +109,22 @@
 		busy = TRUE
 		if(instant || do_after(user, 50 * toolspeed, target = target))
 			var/obj/effect/decal/cleanable/crayon/C = new /obj/effect/decal/cleanable/crayon(target,colour,drawtype,temp)
+			var/list/click_params = params2list(params)
+			C.pixel_x = clamp(text2num(click_params["icon-x"]) - 16, -(world.icon_size/2), world.icon_size/2)
+			C.pixel_y = clamp(text2num(click_params["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
 			C.add_hiddenprint(user)
 			to_chat(user, "<span class='info'>You finish drawing [temp].</span>")
+			if(length(text_buffer) > 1)
+				text_buffer = copytext(text_buffer, length(text_buffer[1]) + 1)
+				attack_self()
+
 			if(uses)
 				uses--
 				if(!uses)
 					to_chat(user, "<span class='danger'>You used up your [name]!</span>")
 					qdel(src)
 		busy = FALSE
+
 
 /obj/item/toy/crayon/attack(mob/M, mob/user)
 	var/huffable = istype(src,/obj/item/toy/crayon/spraycan)
@@ -120,6 +145,10 @@
 	else
 		..()
 
+/obj/item/toy/crayon/proc/crayon_text_strip(text)
+	text = copytext(text, 1, MAX_MESSAGE_LEN)
+	var/regex/crayon_regex = regex(@"[^\W!?,.=&%#+/\-\s]", "ig")
+	return lowertext(crayon_regex.Replace(text, ""))
 
 /obj/item/toy/crayon/red
 	icon_state = "crayonred"
