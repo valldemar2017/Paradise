@@ -1,3 +1,4 @@
+#define ALL_PEN_COLORS list("red" = list(1, 0.25, 0.25),"orange" = list(1, 0.5, 0.5),"yellow" = list(1, 1, 0),"green" = list(0, 1, 0),"blue" = list(0.2, 0.2, 1),"purple" = list(1, 0.25, 1),"black" = list(0.25, 0.25, 0.25),"grey" = list(0.5, 0.5, 0.5),"gray" = list(0.5, 0.5, 0.5),"white" = list(1, 1, 1))
 /* Pens!
  * Contains:
  *		Pens
@@ -50,6 +51,21 @@
 	icon_state = "pen"
 	colour = "white"
 
+/obj/item/pen/attackby(obj/item/I, mob/user, params)
+	if (istype(src, /obj/item/pen/multi) || istype(src, /obj/item/pen/sleepy) || istype(src, /obj/item/pen/edagger) || istype(src, /obj/item/pen/poison))
+		return
+
+	if (istype(I, /obj/item/stack/ore/bluespace_crystal))
+		if (I.use(1))
+			var/obj/item/pen/multi/P = new /obj/item/pen/multi(src)
+			P.colour_choices = list()
+			P.colour_choices[src.colour] = ALL_PEN_COLORS[src.colour]
+			P.colour = src.colour
+			user.put_in_hands(P)
+			to_chat(usr, "You upgrade [src] using [I].")
+			P.update_icon()
+			src.Destroy()
+
 /obj/item/pen/multi
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
@@ -77,6 +93,23 @@
 
 /obj/item/pen/multi/attack_self(mob/living/user as mob)
 	select_colour(user)
+
+/obj/item/pen/multi/attackby(obj/item/P, mob/living/user, params)
+	..()
+	var/obj/item/toy/crayon/item = P
+	if ((!istype(item, /obj/item/toy/crayon)) || istype(item, /obj/item/toy/crayon/spraycan))
+		return
+
+	if (item.colourName in colour_choices)
+		to_chat(usr, "[src] already has this color!")
+		return
+
+	if (item.colourName in ALL_PEN_COLORS)
+		to_chat(usr, "You attach [item] to [src].")
+		colour_choices[item.colourName] = ALL_PEN_COLORS[item.colourName]
+		P.Destroy()
+	else
+		to_chat(usr, "[item] is too cool to be attached to [src]!")
 
 /obj/item/pen/multi/update_icon()
 	overlays.Cut()
@@ -195,3 +228,5 @@
 		to_chat(user, "<span class='warning'>You apply the poison to [P].</span>")
 	else
 		to_chat(user, "<span class='warning'>[src] clicks. It seems to be depleted.</span>")
+
+#undef ALL_PEN_COLORS
