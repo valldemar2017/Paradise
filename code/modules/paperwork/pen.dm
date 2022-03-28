@@ -85,6 +85,10 @@
 	update_icon()
 
 /obj/item/pen/multi/proc/select_colour(mob/user as mob)
+	if (colour_choices.len == 1)
+		to_chat(usr, "[src] has only [colour] color!")
+		return
+
 	var/newcolour = input(user, "Which colour would you like to use?", name, colour) as null|anything in colour_choices
 	if(newcolour)
 		colour = newcolour
