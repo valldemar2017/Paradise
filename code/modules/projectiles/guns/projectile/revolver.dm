@@ -193,7 +193,12 @@
 	name = "\improper Unica 6 auto-revolver"
 	desc = "A retro high-powered autorevolver typically used by officers of the New Russia military. Uses .357 ammo."	//>10mm hole >.357
 	icon_state = "mateba"
-
+/obj/item/gun/projectile/revolver/mateba/New()
+	..()
+	options= list()
+	options["Warhawk"]="mateba_warhawk"
+	options["Diamondback"]="mateba_diamondback"
+	options["Cancel"]=null
 /obj/item/gun/projectile/revolver/golden
 	name = "\improper Golden revolver"
 	desc = "This ain't no game, ain't never been no show, And I'll gladly gun down the oldest lady you know. Uses .357 ammo."
