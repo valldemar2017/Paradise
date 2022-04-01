@@ -892,7 +892,8 @@
 								read = TRUE
 								if(LAZYLEN(R.fields["comments"]))
 									for(var/c in R.fields["comments"])
-										to_chat(usr, c)
+										to_chat(usr, c["header"])
+										to_chat(usr,c["text"])
 								else
 									to_chat(usr, "<span class='warning'>No comment found</span>")
 								to_chat(usr, "<a href='?src=[UID()];medrecordadd=`'>\[Add comment\]</a>")
@@ -903,7 +904,7 @@
 	if(href_list["medrecordadd"])
 		if(usr.incapacitated() || !hasHUD(usr, EXAMINE_HUD_MEDICAL))
 			return
-		var/raw_input = input("Add Comment:", "Medical records", null, null) as message
+		var/raw_input = input("Add Comment:", "Medical records", null, null) as text
 		var/sanitized = copytext(trim(sanitize(raw_input)), 1, MAX_MESSAGE_LEN)
 		if(!sanitized || usr.stat || usr.restrained() || !hasHUD(usr,  EXAMINE_HUD_MEDICAL))
 			return
