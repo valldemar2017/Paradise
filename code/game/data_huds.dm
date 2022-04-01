@@ -494,8 +494,10 @@
 	else if(isAI(commenter))
 		var/mob/living/silicon/ai/U = commenter
 		commenter_display = "[U.name] (artificial intelligence)"
-	comment_text = "Made by [commenter_display] on [GLOB.current_date_string] [station_time_timestamp()]:<br>[comment_text]"
 
 	if(!R.fields["comments"])
 		R.fields["comments"] = list()
-	R.fields["comments"] += list(comment_text)
+	R.fields["comments"] += list(list(
+						header = "Made by [commenter_display]  on [GLOB.current_date_string] [station_time_timestamp()]",
+						text = comment_text
+					))
