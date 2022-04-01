@@ -73,7 +73,7 @@
 
 	//zealot_master is a reference to the mob that converted them into a zealot (for ease of investigation and such)
 	var/mob/living/carbon/human/zealot_master = null
-
+	var/advanced_mind=FALSE
 	var/list/learned_recipes //List of learned recipe TYPES.
 
 /datum/mind/New(new_key)
