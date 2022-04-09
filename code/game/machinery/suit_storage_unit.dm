@@ -519,9 +519,97 @@
 
 
 ////////
+/obj/machinery/suit_storage_unit/interact(mob/user)
+	if(!check_menu(user))
+		return
+	var/static/list/items
+	if(!items)
+		items = list(
+				"suit" = create_silhouette_of(/obj/item/clothing/suit/space/eva),
+				"helmet" = create_silhouette_of(/obj/item/clothing/head/helmet/space/eva),
+				"mask" = create_silhouette_of(/obj/item/clothing/mask/breath),
+				"storage" = create_silhouette_of(/obj/item/tank/air),
+				"magboots"=create_silhouette_of(/obj/item/clothing/shoes/magboots)
+		)
+	var/list/choices = list()
+	if(!check_menu(user))
+		return
+	if(locked)
+		choices["unlock"] = icon('icons/mob/radial.dmi', "radial_unlock")
+	else if (state_open)
+		choices["close"] = icon('icons/mob/radial.dmi', "radial_close")
+
+		for (var/item_key in items)
+			var/item = vars[item_key]
+			if (item)
+				choices[item_key] = item
+			else
+				// If the item doesn't exist, put a silhouette in its place
+				choices[item_key] = items[item_key]
+	else
+		choices["open"] = icon('icons/mob/radial.dmi', "radial_open")
+		choices["disinfect"] = icon('icons/mob/radial.dmi', "radial_disinfect")
+		choices["lock"] = icon('icons/mob/radial.dmi', "radial_lock")
+		if(occupant)
+			to_chat(user,"<span class='warning'>Biological entity detected. Please remove.</span>")
+			choices["eject"]=icon('icons/mob/zone_sel.dmi',"human")
+	if(uv)
+		return
+	var/choice = show_radial_menu(user, src, choices, custom_check = CALLBACK(src, .proc/check_menu, user))
+	if (!choice)
+		return
+	switch (choice)
+		if ("open")
+			if (!state_open)
+				open_machine(drop = FALSE)
+				if (occupant)
+					dump_contents()
+		if ("close")
+			if (state_open)
+				close_machine()
+		if ("disinfect")
+			if (occupant && safeties)
+				return
+			else if (!helmet && !mask && !suit && !storage && !occupant)
+				return
+			else
+				if (occupant)
+					var/mob/living/mob_occupant = occupant
+					to_chat(mob_occupant, "<span class='warning'>[src]'s confines grow warm, then hot, then scorching. You're being burned [!mob_occupant.stat ? "alive" : "away"]!</span>")
+				cook()
+		if ("lock", "unlock")
+			if (!state_open)
+				locked = !locked
+		if("eject")
+			if(occupant)
+				eject_occupant()
+		else
+			var/obj/item/item_to_dispense = vars[choice]
+			if (item_to_dispense)
+				vars[choice] = null
+				user.put_in_hands(item_to_dispense)
+				update_icon()
+			else
+				var/obj/item/in_hands = user.get_active_hand()
+				if (in_hands)
+					attackby(in_hands, user)
+				update_icon()
+	interact(user)
+
+/obj/machinery/suit_storage_unit/proc/create_silhouette_of(atom/item)
+	var/image/image = image(initial(item.icon), initial(item.icon_state))
+	image.alpha = 170
+	image.color = COLOR_RED
+	return image
+
+/obj/machinery/suit_storage_unit/proc/check_menu(mob/living/user)
+	if(!istype(user))
+		return FALSE
+	if(user.incapacitated() || !user.Adjacent(src))
+		return FALSE
+	return TRUE
 
 /obj/machinery/suit_storage_unit/attack_hand(mob/user)
-	var/dat = {"<meta charset="UTF-8">"}
 	if(shocked && !(stat & NOPOWER))
 		if(shock(user, 100))
 			return
@@ -531,48 +619,7 @@
 		return
 	if(panel_open) //The maintenance panel is open. Time for some shady stuff
 		wires.Interact(user)
-	if(uv) //The thing is running its cauterisation cycle. You have to wait.
-		dat += "<HEAD><TITLE>Suit storage unit</TITLE></HEAD>"
-		dat+= "<font color ='red'><B>Unit is cauterising contents with selected UV ray intensity. Please wait.</font></B><BR>"
-	else
-		if(!broken)
-			dat+= "<B>Welcome to the Unit control panel.</B><HR>"
-			dat+= text("Helmet storage compartment: <B>[]</B><BR>",(helmet ? helmet.name : "</font><font color ='grey'>No helmet detected.") )
-			if(helmet && state_open)
-				dat+="<A href='?src=[UID()];dispense_helmet=1'>Dispense helmet</A><BR>"
-			dat+= text("Suit storage compartment: <B>[]</B><BR>",(suit ? suit.name : "</font><font color ='grey'>No exosuit detected.") )
-			if(suit && state_open)
-				dat+="<A href='?src=[UID()];dispense_suit=1'>Dispense suit</A><BR>"
-			dat+= text("Breathmask storage compartment: <B>[]</B><BR>",(mask ? mask.name : "</font><font color ='grey'>No breathmask detected.") )
-			if(mask && state_open)
-				dat+="<A href='?src=[UID()];dispense_mask=1'>Dispense mask</A><BR>"
-			dat+= text("Magboots storage compartment: <B>[]</B><BR>",(magboots ? magboots.name : "</font><font color ='grey'>No magboots detected.") )
-			if(magboots && state_open)
-				dat+="<A href='?src=[UID()];dispense_magboots=1'>Dispense magboots</A><BR>"
-			dat+= text("Tank storage compartment: <B>[]</B><BR>",(storage ? storage.name : "</font><font color ='grey'>No storage item detected.") )
-			if(storage && state_open)
-				dat+="<A href='?src=[UID()];dispense_storage=1'>Dispense storage item</A><BR>"
-			if(occupant)
-				dat+= "<HR><B><font color ='red'>WARNING: Biological entity detected inside the Unit's storage. Please remove.</B></font><BR>"
-				dat+= "<A href='?src=[UID()];eject_guy=1'>Eject extra load</A>"
-			dat+= text("<HR>Unit is: [] - <A href='?src=[UID()];toggle_open=1'>[] Unit</A> ",(state_open ? "Open" : "Closed"),(state_open ? "Close" : "Open"))
-			if(state_open)
-				dat+="<HR>"
-			else
-				dat+= text(" - <A href='?src=[UID()];toggle_lock=1'>*[] Unit*</A><HR>",(locked ? "Unlock" : "Lock") )
-			dat+= text("Unit status: []",(locked? "<font color ='red'><B>**LOCKED**</B></font><BR>" : "<font color ='green'><B>**UNLOCKED**</B></font><BR>") )
-			dat+= "<A href='?src=[UID()];cook=1'>Start Disinfection cycle</A><BR>"
-			dat += "<BR><BR><A href='?src=[user.UID()];mach_close=suit_storage_unit'>Close control panel</A>"
-		else //Ohhhh shit it's dirty or broken! Let's inform the guy.
-			dat+= "<HEAD><TITLE>Suit storage unit</TITLE></HEAD>"
-			dat+= "<font color='maroon'><B>Unit chamber is too contaminated to continue usage. Please call for a qualified individual to perform maintenance.</font></B><BR><BR>"
-			dat+= "<HR><A href='?src=[user.UID()];mach_close=suit_storage_unit'>Close control panel</A>"
-
-
-	var/datum/browser/popup = new(user, "suit_storage_unit", name, 400, 500)
-	popup.set_content(dat)
-	popup.open(0)
-	onclose(user, "suit_storage_unit")
+	interact(user)
 	return
 
 /obj/machinery/suit_storage_unit/proc/check_allowed(user)
@@ -580,66 +627,6 @@
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return FALSE
 	return TRUE
-
-/obj/machinery/suit_storage_unit/Topic(href, href_list)
-	if(..())
-		return 1
-	if(shocked && !(stat & NOPOWER))
-		if(shock(usr, 100))
-			return
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
-		usr.set_machine(src)
-		if(href_list["toggleUV"])
-			toggleUV(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["togglesafeties"])
-			togglesafeties(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["dispense_helmet"])
-			dispense_helmet(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["dispense_suit"])
-			dispense_suit(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["dispense_mask"])
-			dispense_mask(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["dispense_magboots"])
-			dispense_magboots(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["dispense_storage"])
-			dispense_storage(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["toggle_open"])
-			if(!check_allowed(usr))
-				return
-			toggle_open(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["toggle_lock"])
-			if(!check_allowed(usr))
-				return
-			toggle_lock(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["cook"])
-			cook(usr)
-			updateUsrDialog()
-			update_icon()
-		if(href_list["eject_guy"])
-			eject_occupant(usr)
-			updateUsrDialog()
-			update_icon()
-	add_fingerprint(usr)
-	return
-
 
 /obj/machinery/suit_storage_unit/proc/toggleUV(mob/user)
 	if(!panel_open)
