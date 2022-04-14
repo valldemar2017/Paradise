@@ -162,72 +162,82 @@
 ********************/
 
 /obj/machinery/kitchen_machine/interact(mob/user) // The microwave Menu
+	var/list/choices=list()
 	if(panel_open || !anchored)
 		return
-	var/dat = {"<meta charset="UTF-8">"}
-	if(broken > 0)
-		dat = {"<code>Bzzzzttttt</code>"}
+	if(broken>0)
+		to_chat(user,"<span class='warning'>Bzzzzttttt</span>")
 	else if(operating)
-		dat = {"<code>[pick(cook_verbs)] in progress!<BR>Please wait...!</code>"}
+		to_chat(user,"<span class='notice'>[pick(cook_verbs)] in progress!<BR>Please wait...!</span>")
 	else if(dirty==100)
-		dat = {"<code>This [src] is dirty!<BR>Please clean it before use!</code>"}
+		to_chat(user,"<span class='warning'>This [src] is dirty!<BR>Please clean it before use!</span>")
 	else
-		var/list/items_counts = new
-		var/list/items_measures = new
-		var/list/items_measures_p = new
-		for(var/obj/O in contents)
-			var/display_name = O.name
-			if(istype(O,/obj/item/reagent_containers/food/snacks/egg))
-				items_measures[display_name] = "egg"
-				items_measures_p[display_name] = "eggs"
-			if(istype(O,/obj/item/reagent_containers/food/snacks/tofu))
-				items_measures[display_name] = "tofu chunk"
-				items_measures_p[display_name] = "tofu chunks"
-			if(istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
-				items_measures[display_name] = "slab of meat"
-				items_measures_p[display_name] = "slabs of meat"
-			if(istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
-				display_name = "Turnovers"
-				items_measures[display_name] = "turnover"
-				items_measures_p[display_name] = "turnovers"
-			if(istype(O,/obj/item/reagent_containers/food/snacks/carpmeat))
-				items_measures[display_name] = "fillet of meat"
-				items_measures_p[display_name] = "fillets of meat"
-			items_counts[display_name]++
-		for(var/O in items_counts)
-			var/N = items_counts[O]
-			if(!(O in items_measures))
-				dat += {"<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"}
-			else
-				if(N==1)
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"}
-				else
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
-
-		for(var/datum/reagent/R in reagents.reagent_list)
-			var/display_name = R.name
-			if(R.id == "capsaicin")
-				display_name = "Hotsauce"
-			if(R.id == "frostoil")
-				display_name = "Coldsauce"
-			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
-
-		if(items_counts.len==0 && reagents.reagent_list.len==0)
-			dat = {"<B>The [src] is empty</B><BR>"}
-		else
-			dat = {"<b>Ingredients:</b><br>[dat]"}
-		dat += {"<HR><BR>\
-<A href='?src=[UID()];action=cook'>Turn on!</A><BR>\
-<A href='?src=[UID()];action=dispose'>Eject ingredients!</A><BR>\
-"}
-
-	var/datum/browser/popup = new(user, name, name, 400, 400)
-	popup.set_content(dat)
-	popup.open(0)
-	onclose(user, "[name]")
+		if(!istype(user))
+			return
+		if(user.incapacitated() || !user.Adjacent(src))
+			return
+		choices["turn_on"]=icon('icons/mob/radial.dmi', "radial_use")
+		choices["drop_contents"]=icon('icons/mob/radial.dmi', "radial_drop")
+		var/choice = show_radial_menu(user, src, choices,require_near=!issilicon(user))
+		if (!choice)
+			return
+		switch(choice)
+			if("turn_on")
+				cook()
+				return
+			if("drop_contents")
+				dispose()
+				return
 	return
 
+/obj/machinery/kitchen_machine/examine(mob/user)
+	. = ..()
+	var/list/items_counts = new
+	var/list/items_measures = new
+	var/list/items_measures_p = new
+	for(var/obj/O in contents)
+		var/display_name = O.name
+		if(istype(O,/obj/item/reagent_containers/food/snacks/egg))
+			items_measures[display_name] = "egg"
+			items_measures_p[display_name] = "eggs"
+		if(istype(O,/obj/item/reagent_containers/food/snacks/tofu))
+			items_measures[display_name] = "tofu chunk"
+			items_measures_p[display_name] = "tofu chunks"
+		if(istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
+			items_measures[display_name] = "slab of meat"
+			items_measures_p[display_name] = "slabs of meat"
+		if(istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
+			display_name = "Turnovers"
+			items_measures[display_name] = "turnover"
+			items_measures_p[display_name] = "turnovers"
+		if(istype(O,/obj/item/reagent_containers/food/snacks/carpmeat))
+			items_measures[display_name] = "fillet of meat"
+			items_measures_p[display_name] = "fillets of meat"
+		items_counts[display_name]++
+	var/msg
+	for(var/O in items_counts)
+		var/N = items_counts[O]
+		if(!(O in items_measures))
+			msg += {"<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"}
+		else
+			if(N==1)
+				msg += {"<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"}
+			else
+				msg += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
 
+	for(var/datum/reagent/R in reagents.reagent_list)
+		var/display_name = R.name
+		if(R.id == "capsaicin")
+			display_name = "Hotsauce"
+		if(R.id == "frostoil")
+			display_name = "Coldsauce"
+		msg+= {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
+
+	if(items_counts.len==0 && reagents.reagent_list.len==0)
+		msg = {"<B>The [src] is empty</B><BR>"}
+	else
+		msg ={"<b>Ingredients:</b><br>[msg]"}
+	. += msg
 
 /************************************
 *   Machine Menu Handling/Cooking	*
