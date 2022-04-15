@@ -29,6 +29,7 @@ const getStatColor = cm => {
 export const CrewMonitor = (props, context) => {
   const { act, data } = useBackend(context);
   const [tabIndex, setTabIndex] = useLocalState(context, 'tabIndex', 0);
+  const [zoom, setZoom] = useLocalState(context, 'zoom', 1);
   const decideTab = index => {
     switch (index) {
       case 0:
@@ -54,7 +55,7 @@ export const CrewMonitor = (props, context) => {
             <Tabs.Tab
               key="MapView"
               selected={1 === tabIndex}
-              onClick={() => setTabIndex(1)}>
+              onClick={() => { setTabIndex(1); setZoom(1); }}>
               <Icon name="map-marked-alt" /> Map View
             </Tabs.Tab>
           </Tabs>
