@@ -72,7 +72,7 @@
 	new /obj/item/storage/belt/medical(src)
 	new /obj/item/clothing/glasses/hud/health(src)
 	new /obj/item/clothing/shoes/sandal/white(src)
-
+	new /obj/item/clothing/accessory/storage/white_vest(src)
 
 //Exam Room
 /obj/structure/closet/secure_closet/exam
@@ -191,7 +191,7 @@
 	new /obj/item/door_remote/chief_medical_officer(src)
 	new /obj/item/reagent_containers/food/drinks/mug/cmo(src)
 	new /obj/item/clothing/accessory/medal/medical(src)
-
+	new /obj/item/clothing/accessory/storage/white_vest(src)
 
 /obj/structure/closet/secure_closet/animal
 	name = "animal control locker"

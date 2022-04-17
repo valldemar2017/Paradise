@@ -126,6 +126,7 @@
 	new /obj/item/reagent_containers/food/drinks/mug/hos(src)
 	new /obj/item/organ/internal/cyberimp/eyes/hud/security(src)
 	new /obj/item/clothing/accessory/medal/security(src)
+	new /obj/item/clothing/accessory/storage/black_vest(src)
 
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
@@ -192,7 +193,7 @@
 	new /obj/item/clothing/head/helmet(src)
 	new /obj/item/melee/baton/loaded(src)
 	new /obj/item/clothing/suit/armor/secjacket(src)
-
+	new /obj/item/clothing/accessory/storage/black_vest(src)
 
 /obj/structure/closet/secure_closet/brigdoc
 	name = "brig physician's locker"
