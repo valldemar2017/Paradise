@@ -165,10 +165,12 @@
 			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
 	else if(track)
 		to_chat(src, "[part_a][track][part_b][verb], \"[message]\"</span></span>")
+		playsound(loc,'sound/voice/radio_chatter.ogg',40,0)
 		if(client?.prefs.toggles2 & PREFTOGGLE_2_RUNECHAT)
 			create_chat_message(speaker, message, TRUE, FALSE)
 	else
 		to_chat(src, "[part_a][speaker_name][part_b][verb], \"[message]\"</span></span>")
+		playsound(loc,'sound/voice/radio_chatter.ogg',40,0)
 		if(client?.prefs.toggles2 & PREFTOGGLE_2_RUNECHAT)
 			create_chat_message(speaker, message, TRUE, FALSE)
 
