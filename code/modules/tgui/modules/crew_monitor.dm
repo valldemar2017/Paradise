@@ -38,5 +38,7 @@
 
 	data["isAI"] = isAI(user)
 	data["crewmembers"] = GLOB.crew_repository.health_data(T)
-
+	var/obj/item/sensor_device/D=host
+	if(D)
+		D.update_icon() //если поставить это непосредственно в код крюманифеста спрайт будет обновлять по нажатию. А это - нот гут
 	return data
