@@ -136,7 +136,6 @@
 	else
 		to_chat(user, "<span class='alert'>You have no idea what you can cook with this [O].</span>")
 		return 1
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/add_item(obj/item/I, mob/user)
 	if(!user.drop_item())
