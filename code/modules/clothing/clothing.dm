@@ -710,10 +710,11 @@ BLIND     // can't see anything
 	. = ..()
 
 /obj/item/clothing/under/attack_hand(mob/user)
-	if(accessories.len)
-		for(var/obj/item/clothing/accessory/storage/S in accessories)
-			S.attack_hand(user)
-			return TRUE
+	if(src.loc == usr)  //Если экипировано
+		if(accessories.len)
+			for(var/obj/item/clothing/accessory/storage/S in accessories)
+				S.attack_hand(user)
+				return TRUE
 	. = ..()
 
 /obj/item/clothing/under/proc/attach_accessory(obj/item/clothing/accessory/A, mob/user, unequip = FALSE)
@@ -812,6 +813,14 @@ BLIND     // can't see anything
 
 /obj/item/clothing/under/AltClick()
 	handle_accessories_removal()
+
+/obj/item/clothing/under/MouseDrop(atom/over)
+	. = ..()
+	if(istype(over,/obj/screen/inventory/hand))
+		if(usr.unEquip(src))	//Если может быть снято
+			forceMove(get_turf(src))
+			usr.put_in_hands(src)
+
 
 /obj/item/clothing/obj_destruction(damage_flag)
 	if(damage_flag == "bomb" || damage_flag == "melee")
