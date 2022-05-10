@@ -360,13 +360,20 @@ GLOBAL_LIST_INIT(all_supply_groups, list(SUPPLY_EMERGENCY,SUPPLY_SECURITY,SUPPLY
 	containername = "tactical armor crate"
 
 /datum/supply_packs/security/armory/webbing
-	name = "Webbing Crate"
+	name = "Security equipment webbing Crate"
 	contains = list(/obj/item/storage/belt/security/webbing,
 					/obj/item/storage/belt/security/webbing,
 					/obj/item/storage/belt/security/webbing)
 	cost = 15
 	containername = "tactical webbing crate"
 
+/datum/supply_packs/security/armory/vest
+	name = "Security webbing vest crate"
+	contains = list(/obj/item/clothing/accessory/storage/black_vest,
+					/obj/item/clothing/accessory/storage/black_vest,
+					/obj/item/clothing/accessory/storage/black_vest)
+	cost = 50
+	containername = "vest crate"
 /datum/supply_packs/security/armory/swat
 	name = "SWAT gear crate"
 	contains = list(/obj/item/clothing/head/helmet/swat,
@@ -734,7 +741,15 @@ GLOBAL_LIST_INIT(all_supply_groups, list(SUPPLY_EMERGENCY,SUPPLY_SECURITY,SUPPLY
 	containertype = /obj/structure/closet/crate/secure
 	containername = "space suit crate"
 	access = ACCESS_EVA
-
+/datum/supply_packs/engineering/vest
+	name = "Engineering webbings vests Crate"
+	contains = list(/obj/item/clothing/accessory/storage/brown_vest,
+					/obj/item/clothing/accessory/storage/brown_vest,
+					/obj/item/clothing/accessory/storage/brown_vest)
+	cost = 30
+	containername = "engineering webbings vests crate"
+	containertype = /obj/structure/closet/crate/secure/engineering
+	access = ACCESS_ENGINE_EQUIP
 /datum/supply_packs/engineering/inflatable
 	name = "Inflatable barriers Crate"
 	contains = list(/obj/item/storage/briefcase/inflatable,
@@ -938,6 +953,15 @@ GLOBAL_LIST_INIT(all_supply_groups, list(SUPPLY_EMERGENCY,SUPPLY_SECURITY,SUPPLY
 	containername = "surgery crate"
 	access = ACCESS_MEDICAL
 
+/datum/supply_packs/medical/vest
+	name = "Medical webbing vests crate"
+	contains = list(/obj/item/clothing/accessory/storage/white_vest,
+					/obj/item/clothing/accessory/storage/white_vest,
+					/obj/item/clothing/accessory/storage/white_vest)
+	containertype = /obj/structure/closet/crate/secure
+	cost=30
+	containername = "medical webbing vests crate"
+	access=ACCESS_MEDICAL
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Science /////////////////////////////////////////
