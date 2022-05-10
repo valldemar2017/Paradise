@@ -709,6 +709,13 @@ BLIND     // can't see anything
 
 	. = ..()
 
+/obj/item/clothing/under/attack_hand(mob/user)
+	if(accessories.len)
+		for(var/obj/item/clothing/accessory/storage/S in accessories)
+			S.attack_hand(user)
+			return TRUE
+	. = ..()
+
 /obj/item/clothing/under/proc/attach_accessory(obj/item/clothing/accessory/A, mob/user, unequip = FALSE)
 	if(can_attach_accessory(A))
 		if(unequip && !user.unEquip(A)) // Make absolutely sure this accessory is removed from hands

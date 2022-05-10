@@ -6,7 +6,6 @@
 	slot = ACCESSORY_SLOT_UTILITY
 	var/slots = 3
 	var/obj/item/storage/internal/hold
-	actions_types = list(/datum/action/item_action/accessory/storage)
 	w_class = WEIGHT_CLASS_NORMAL // so it doesn't fit in pockets
 
 /obj/item/clothing/accessory/storage/New()
@@ -97,6 +96,12 @@
 	item_color = "vest_brown"
 	slots = 5
 
+/obj/item/clothing/accessory/storage/white_vest
+	name = "white webbing vest"
+	desc = " sterile white synthcotton vest with lots of pockets to unload your hands. Have medical sign on the back"
+	icon_state = "vest_white"
+	item_color = "vest_white"
+	slots = 5
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."

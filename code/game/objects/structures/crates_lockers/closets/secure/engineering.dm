@@ -40,7 +40,7 @@
 	new /obj/item/organ/internal/cyberimp/eyes/meson(src)
 	new /obj/item/clothing/accessory/medal/engineering(src)
 	new /obj/item/holosign_creator/atmos(src)
-
+	new /obj/item/clothing/accessory/storage/brown_vest(src)
 
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies locker"
@@ -112,7 +112,7 @@
 	new /obj/item/clothing/glasses/meson(src)
 	new /obj/item/cartridge/engineering(src)
 	new /obj/item/clothing/head/beret/eng(src)
-
+	new /obj/item/clothing/accessory/storage/brown_vest(src)
 
 /obj/structure/closet/secure_closet/atmos_personal
 	name = "technician's locker"
