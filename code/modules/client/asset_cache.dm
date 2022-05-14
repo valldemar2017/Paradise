@@ -203,6 +203,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"large_stamp-ward.png"      = 'icons/paper_icons/large_stamp-ward.png',
 		"talisman.png"              = 'icons/paper_icons/talisman.png',
 		"ntlogo.png"                = 'icons/paper_icons/ntlogo.png',
+		"tsflogo.png"               = 'icons/paper_icons/tsflogo.png',
 		"syndielogo.png"		='icons/paper_icons/syndielogo.png'
 	)
 
