@@ -521,6 +521,7 @@
 		text = replacetext(text, "\[row\]",		"</td><tr>")
 		text = replacetext(text, "\[cell\]",	"<td>")
 		text = replacetext(text, "\[logo\]",	"&ZeroWidthSpace;<img src = ntlogo.png>")
+		text = replacetext(text, "\[tsflogo\]",	"&ZeroWidthSpace;<img src = tsflogo.png>")
 		text = replacetext(text, "\[time\]",	"[station_time_timestamp()]") // TO DO
 		if(!no_font)
 			if(P)
@@ -601,6 +602,7 @@
 	text = replacetext(text, "</td><tr>",				"\[row\]")
 	text = replacetext(text, "<td>",					"\[cell\]")
 	text = replacetext(text, "<img src = ntlogo.png>",	"\[logo\]")
+	text = replacetext(text, "<img src = tsflogo.png>",	"\[tsflogo\]")
 	return text
 
 /datum/html/split_holder
