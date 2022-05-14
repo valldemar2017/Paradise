@@ -365,18 +365,15 @@
 	visible_message("<span class='notice'>\The [src] turns on.</span>", "<span class='notice'>You hear \a [src].</span>")
 	operating = 1
 	icon_state = on_icon
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/abort()
 	operating = 0 // Turn it off again aferwards
 	icon_state = off_icon
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/stop()
 	playsound(loc, 'sound/machines/ding.ogg', 50, 1)
 	operating = 0 // Turn it off again aferwards
 	icon_state = off_icon
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/dispose()
 	for(var/obj/O in contents)
@@ -385,7 +382,6 @@
 		dirty++
 	reagents.clear_reagents()
 	to_chat(usr, "<span class='notice'>You dispose of \the [src]'s contents.</span>")
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/muck_start()
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1) // Play a splat sound
@@ -398,7 +394,6 @@
 	flags = null //So you can't add condiments
 	icon_state = dirty_icon // Make it look dirty too
 	operating = 0 // Turn it off again aferwards
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/broke()
 	do_sparks(2, 1, src)
@@ -407,7 +402,6 @@
 	broken = 2 // Make it broken so it can't be used util fixed
 	flags = null //So you can't add condiments
 	operating = 0 // Turn it off again aferwards
-	updateUsrDialog()
 
 /obj/machinery/kitchen_machine/proc/fail()
 	var/amount = 0
@@ -432,19 +426,3 @@
 		ffuu.reagents.add_reagent("????", amount/10)
 		ffuu.forceMove(get_turf(src))
 
-/obj/machinery/kitchen_machine/Topic(href, href_list)
-	if(..() || panel_open)
-		return
-
-	usr.set_machine(src)
-	if(operating)
-		updateUsrDialog()
-		return
-
-	switch(href_list["action"])
-		if("cook")
-			cook()
-
-		if("dispose")
-			dispose()
-	return
