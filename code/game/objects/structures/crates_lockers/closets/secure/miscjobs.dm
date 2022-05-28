@@ -58,3 +58,13 @@
 	new /obj/item/ammo_box/magazine/sniper_rounds/penetrator(src)
 	new /obj/item/clothing/glasses/thermal(src)
 	new /obj/item/megaphone(src)
+
+/obj/structure/closet/secure_closet/soltrader
+	name = "Sol Trader's locker"
+	icon_state = "soltsecure1"
+	icon_closed = "soltsecure"
+	icon_locked = "soltsecure1"
+	icon_opened = "soltsecureopen"
+	icon_broken = "soltsecurebroken"
+	icon_off = "soltsecureoff"
+	req_access = list(ACCESS_TRADE_SOL)

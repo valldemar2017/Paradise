@@ -842,6 +842,12 @@
 	item_state = "lordadmiral"
 	allowed = list (/obj/item/gun)
 
+/obj/item/clothing/suit/soltcoat
+	name = "Sol Trader's coat"
+	desc = "A comfortable, non-restraining cloak worn by Sol Traders"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	icon_state = "soltcoat"
+	allowed = list(/obj/item/stack/spacecash,/obj/item/gun)
 /obj/item/clothing/suit/fluff/noble_coat
 	name = "noble coat"
 	desc = "The livid blues, purples and greens are awesome enough to evoke a visceral response in you; it is not dissimilar to indigestion."

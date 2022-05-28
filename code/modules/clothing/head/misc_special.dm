@@ -271,3 +271,7 @@
 		"Grey" = 'icons/mob/species/grey/head.dmi'
 	)
 
+/obj/item/clothing/head/solthat
+	name = "sol trader hat"
+	desc = "A cap to look very serious and unbiased"
+	icon_state = "solthat"

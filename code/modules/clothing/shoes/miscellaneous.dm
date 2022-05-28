@@ -123,6 +123,10 @@
 	icon_state = "jacksandal"
 	item_color = "jacksandal"
 
+/obj/item/clothing/shoes/soltboot
+	name ="sol boots"
+	desc = "Durable and reliable shoes worn by sol traders"
+	icon_state="soltboot"
 /obj/item/clothing/shoes/workboots
 	name = "work boots"
 	desc = "Thick-soled boots for industrial work environments."

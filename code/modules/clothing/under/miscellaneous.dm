@@ -174,6 +174,11 @@
 	item_state = "blueshieldf"
 	item_color = "blueshieldf"
 
+/obj/item/clothing/under/soltsuit
+	name = "sol trader's jumpsuit"
+	desc = "A comfortable and durable yellow uniform worn by Sol Federation traders"
+	icon_state = "soltsuit"
+	item_color = "soltsuit"
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
