@@ -698,11 +698,12 @@
 /datum/outfit/admin/sol_trader
 	name = "Sol Trader"
 
-	uniform = /obj/item/clothing/under/rank/cargotech
+	uniform = /obj/item/clothing/under/soltsuit
+	suit = /obj/item/clothing/suit/soltcoat
 	back = /obj/item/storage/backpack/industrial
 	belt = /obj/item/melee/classic_baton
-	head = /obj/item/clothing/head/soft
-	shoes = /obj/item/clothing/shoes/black
+	head = /obj/item/clothing/head/solthat
+	shoes = /obj/item/clothing/shoes/soltboot
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
 	id = /obj/item/card/id/supply
