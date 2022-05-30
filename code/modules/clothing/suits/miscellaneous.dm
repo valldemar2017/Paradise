@@ -848,6 +848,10 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	icon_state = "soltcoat"
 	allowed = list(/obj/item/stack/spacecash,/obj/item/gun)
+	ignore_suitadjust = 0
+	suit_adjusted = 1
+	actions_types = list(/datum/action/item_action/openclose)
+	adjust_flavour = "unzip"
 /obj/item/clothing/suit/fluff/noble_coat
 	name = "noble coat"
 	desc = "The livid blues, purples and greens are awesome enough to evoke a visceral response in you; it is not dissimilar to indigestion."
