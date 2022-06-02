@@ -846,7 +846,8 @@
 	name = "Sol Trader's coat"
 	desc = "A comfortable, non-restraining cloak worn by Sol Traders"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	icon_state = "soltcoat"
+	icon_state = "soltcoat_open"
+	item_state = "soltcoat_open"
 	allowed = list(/obj/item/stack/spacecash,/obj/item/gun)
 	ignore_suitadjust = 0
 	suit_adjusted = 1
