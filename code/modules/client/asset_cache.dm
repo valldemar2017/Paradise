@@ -201,6 +201,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"large_stamp-rep.png"	    = 'icons/paper_icons/large_stamp-rep.png',
 		"large_stamp-magistrate.png"= 'icons/paper_icons/large_stamp-magistrate.png',
 		"large_stamp-ward.png"      = 'icons/paper_icons/large_stamp-ward.png',
+		"large_stamp-solt.png"      = 'icons/paper_icons/large_stamp-solt.png',
 		"talisman.png"              = 'icons/paper_icons/talisman.png',
 		"ntlogo.png"                = 'icons/paper_icons/ntlogo.png',
 		"tsflogo.png"               = 'icons/paper_icons/tsflogo.png',
