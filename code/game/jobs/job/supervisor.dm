@@ -34,7 +34,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	shoes = /obj/item/clothing/shoes/brown
 	head = /obj/item/clothing/head/caphat
 	l_ear = /obj/item/radio/headset/heads/captain/alt
-	l_pocket = /obj/item/lighter/zippo/
+	l_pocket = /obj/item/lighter/zippo/captain
 	glasses = /obj/item/clothing/glasses/hud/skills/sunglasses
 	id = /obj/item/card/id/gold
 	pda = /obj/item/pda/captain
@@ -94,6 +94,7 @@ GLOBAL_DATUM_INIT(captain_announcement, /datum/announcement/minor, new(do_newsca
 	head = /obj/item/clothing/head/hopcap
 	glasses = /obj/item/clothing/glasses/hud/skills/sunglasses
 	l_ear = /obj/item/radio/headset/heads/hop
+	l_pocket = /obj/item/lighter/zippo/head_personnel
 	id = /obj/item/card/id/silver
 	pda = /obj/item/pda/heads/hop
 	backpack_contents = list(
