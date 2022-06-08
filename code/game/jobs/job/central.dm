@@ -25,6 +25,7 @@
 	shoes = /obj/item/clothing/shoes/centcom
 	head = /obj/item/clothing/head/beret/centcom/officer
 	l_ear = /obj/item/radio/headset/centcom
+	l_pocket = /obj/item/lighter/zippo/ai
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
 	id = /obj/item/card/id/centcom
 	pda = /obj/item/pda/centcom
