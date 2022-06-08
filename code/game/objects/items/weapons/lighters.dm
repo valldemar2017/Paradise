@@ -167,19 +167,19 @@
 	icon_off = "gonzozippo"
 /obj/item/lighter/zippo/head_security
 	name ="Head of Security zippo"
-	desc = "A limited edition Zippo for NT Heads. Fuel it with clown's tears."
+	desc = "A limited edition Zippo for NT Heads. Fuel it with the clown's tears."
 	icon_state = "zippo_hos"
 	icon_on = "zippo_hos_open"
 	icon_off = "zippo_hos"
 /obj/item/lighter/zippo/head_personnel
-	name="Head of Personnel zippo"
-	desc="A limited edition Zippo for NT Heads. Tries it best to look like captain's."
+	name="Head of Personnel lighter"
+	desc="A limited edition lighter for NT Heads. Tries its best to look like the Captains."
 	icon_state = "zippo_hop"
 	icon_on = "zippo_hop_open"
 	icon_off="zippo_hop"
 /obj/item/lighter/zippo/head_ce
-	name="Chief Engineer zippo"
-	desc="A limited edition Zippo for NT Heads. It looks very similar to a tesla coil."
+	name="Chief Engineer electric lighter"
+	desc="A tiny handmade tesla coil, apparently used like a lighter. Does not seem to have a power source.. What?"
 	icon_state="zippo_ce"
 	icon_on = "zippo_ce_open"
 	icon_off = "zippo_ce"
@@ -190,17 +190,34 @@
 	icon_on = "zippo_cmo_open"
 	icon_off="zippo_cmo"
 /obj/item/lighter/zippo/head_rd
-	name="Research Director zippo"
-	desc = "A limited edition Zippo for NT Heads. Apparently, this one is made of a micro laser."
+	name="Research Director lighter"
+	desc = "A handheld micro-laser, has enough power to light something on fire. Does not seem to have a power source.. Weird."
 	icon_state="zippo_rd"
 	icon_on = "zippo_rd_open"
 	icon_off="zippo_rd"
 /obj/item/lighter/zippo/captain
-	name = "Captain's zippo"
-	desc = "A limited edition gold Zippo espesially for NT Captains. Looks extremely expensive."
+	name = "Captain's lighter"
+	desc = "A limited edition golden lighter made specifically for NT Captains. Look very expensive, and trust me, it is."
 	icon_state = "zippo_cap"
 	icon_on = "zippo_cap_open"
 	icon_off = "zippo_cap"
+/obj/item/lighter/zippo/ai
+	name = "AI zippo"
+	desc = "A limited edition zippo, made to look like an AI core"
+	icon_state = "zippo_ai"
+	icon_on = "zippo_ai_open"
+	icon_off ="zippo_ai"
+/obj/item/lighter/zippo/ai/attempt_light(mob/living/user)
+	to_chat(user,"<span class='rose'>[generate_ion_law]()</span>")
+	overlays.Cut()
+	overlays.Add(pick("zippo_ai-ai","zippo_ai-bliss","zippo_ai-banned","zippo_ai-anima","zippo_ai-angry","zippo_ai-angel","zippo_ai-clown","zippo_ai-database","zippo_ai-dorf","zippo_ai-fuzz","zippo_ai-glitchman","zippo_ai-goon","zippo_ai-hades","zippo_ai-heartline","zippo_ai-helios","zippo_ai-house","zippo_ai-murica","zippo_ai-syndicatmeow","zippo_ai-magma","zippo_ai-malf","zippo_ai-mono","zippo_ai-red","zippo_ai-text"))
+	return
+
+/obj/item/lighter/zippo/ai/show_off_message(mob/living/user)
+	to_chat(user,"<span class='rose'>You hear a quiet click. The screen turns black</span>")
+	overlays.Cut()
+	overlays.Add("zippo_ai-empty")
+	return
 ///////////
 //MATCHES//
 ///////////
