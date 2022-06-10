@@ -208,7 +208,7 @@
 	icon_on = "zippo_ai_open"
 	icon_off ="zippo_ai"
 /obj/item/lighter/zippo/ai/attempt_light(mob/living/user)
-	to_chat(user,"<span class='rose'>[generate_ion_law]()</span>")
+	to_chat(user,"<span class='rose'>[generate_ion_law()]</span>")
 	overlays.Cut()
 	overlays.Add(pick("zippo_ai-ai","zippo_ai-bliss","zippo_ai-banned","zippo_ai-anima","zippo_ai-angry","zippo_ai-angel","zippo_ai-clown","zippo_ai-database","zippo_ai-dorf","zippo_ai-fuzz","zippo_ai-glitchman","zippo_ai-goon","zippo_ai-hades","zippo_ai-heartline","zippo_ai-helios","zippo_ai-house","zippo_ai-murica","zippo_ai-syndicatmeow","zippo_ai-magma","zippo_ai-malf","zippo_ai-mono","zippo_ai-red","zippo_ai-text"))
 	return
