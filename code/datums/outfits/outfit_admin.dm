@@ -706,6 +706,7 @@
 	shoes = /obj/item/clothing/shoes/soltboot
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
+	l_pocket = /obj/item/stamp/solt
 	id = /obj/item/card/id/supply
 	pda = /obj/item/pda
 	backpack_contents = list(
