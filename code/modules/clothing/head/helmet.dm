@@ -46,7 +46,9 @@
 	item_state = "eileen_hat"
 	w_class = WEIGHT_CLASS_NORMAL
 	flags = HEADBANGPROTECT|BLOCKHAIR
-	armor = list("melee" = 30, "bullet" = 25, "laser" = 25,"energy" = 10, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 40, "acid" = 40)
+	armor = list("melee" = 30, "bullet" = 25, "laser" = 25,"energy" = 10, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 55, "acid" = 40)
+	heat_protection = HEAD
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	flags_inv = HIDEEARS
 	resistance_flags = FIRE_PROOF|ACID_PROOF
 	vision_flags = SEE_MOBS

@@ -23,13 +23,14 @@
 
 /obj/item/clothing/shoes/combat/eileen
 	name = "Crow's boots"
-	desc = "Ancient expensive-looking boots made with some kind of durable leather of dubious origins. The solef are covered in a thick layer of faded blood"
+	desc = "Ancient expensive-looking boots made with some kind of durable leather of dubious origins. The soles are covered in a thick layer of faded blood"
 	icon_state = "eileen_boot"
 	item_state = "eileen_boot"
+	armor = list("melee" = 30, "bullet" = 30, "laser" = 20, "energy" = 20, "bomb" = 40, "bio" = 40, "rad" = 0, "fire" = 95, "acid" = 65)
 	permeability_coefficient = 0.01
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags = NOSLIP
-	slowdown = -1
+	slowdown = -0.4
 
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
