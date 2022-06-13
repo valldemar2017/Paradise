@@ -80,3 +80,12 @@
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.UpdateButtonIcon()
+
+/obj/item/clothing/neck/cloak/eileen
+	name = "Crow's cloak"
+	desc = "An ancient expensive-looking cloak, it is woven with hundreds of crow feathers. You can spot faded blood covering the feathers in some places. Smells.. Unique."
+	icon_state = "eileen_cape"
+	item_state = "eileen_cape"
+	armor = list(melee = 40, bullet = 25, laser = 0, energy = 0, bomb = 25, bio = 50, rad = 30, fire = 0, acid = 0)
+	w_class = WEIGHT_CLASS_SMALL
+	body_parts_covered = UPPER_TORSO | ARMS | HANDS | LOWER_TORSO | LEGS

@@ -2,7 +2,7 @@
 	name = "dragon chest"
 
 /obj/structure/closet/crate/necropolis/dragon/populate_contents()
-	var/loot = rand(1,4)
+	var/loot = rand(1,5)
 	switch(loot)
 		if(1)
 			new /obj/item/melee/ghost_sword(src)
@@ -13,7 +13,13 @@
 			new /obj/item/gun/magic/wand/fireball(src)
 		if(4)
 			new /obj/item/dragons_blood(src)
-
+		if(5)
+			new /obj/item/clothing/under/eileen(src)
+			new /obj/item/clothing/suit/storage/eileen(src)
+			new /obj/item/clothing/shoes/combat/eileen(src)
+			new /obj/item/clothing/neck/cloak/eileen(src)
+			new /obj/item/clothing/mask/eileen(src)
+			new /obj/item/clothing/head/eileen(src)
 
 /obj/structure/closet/crate/necropolis/dragon/crusher
 	name = "firey dragon chest"

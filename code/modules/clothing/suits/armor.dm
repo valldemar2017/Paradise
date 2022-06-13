@@ -494,6 +494,17 @@
 	armor = list(melee = 25, bullet = 15, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0, fire = 40, acid = 40)
 
 //LAVALAND!
+/obj/item/clothing/suit/storage/eileen
+	name = "Crow's coat"
+	desc = "An ancient expensive-looking coat, it is made from durable leather. Doesn't seem to be in the best shape."
+	icon_state = "eileen_coat"
+	item_state = "eileen_coat"
+	allowed = list(/obj/item/flashlight, /obj/item/tank, /obj/item/resonator, /obj/item/mining_scanner, /obj/item/t_scanner/adv_mining_scanner, /obj/item/gun, /obj/item/melee/energy/cleaving_saw)
+	armor = list("melee" = 40, "bullet" = 40, "laser" = 40, "energy" = 40, "bomb" = 60, "bio" = 80, "rad" = 30, "fire" = 100, "acid" = 100)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/suit/hooded/drake
 	name = "drake armour"
