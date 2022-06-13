@@ -33,7 +33,7 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 
 		switch(level)
 			if(SEC_LEVEL_GREEN)
-				GLOB.security_announcement_down.Announce("All threats to the station have passed. All weapons need to be holstered and privacy laws are once again fully enforced.","Attention! Security level lowered to green.")
+				GLOB.security_announcement_down.Announce("Все угрозы станции закончились. Любое оружие должно быть убрано, и законы приватности снова действуют в полную силу.","Внимание! Код безопасности был понижен до Зеленого.")
 				GLOB.security_level = SEC_LEVEL_GREEN
 
 				post_status("alert", "outline")
@@ -46,9 +46,9 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 
 			if(SEC_LEVEL_BLUE)
 				if(GLOB.security_level < SEC_LEVEL_BLUE)
-					GLOB.security_announcement_up.Announce("The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible and random searches are permitted.","Attention! Security level elevated to blue.")
+					GLOB.security_announcement_up.Announce("Станция получила достоверные доказательства о возможной враждебной ситуации на станции. Служба безопасности может держать оружие на виду,а случайные обыски теперь дозволены..","Внимание! Код безопасности был повышен до Синего.")
 				else
-					GLOB.security_announcement_down.Announce("The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed.","Attention! Security level lowered to blue.")
+					GLOB.security_announcement_down.Announce("Непосредственная угроза была разререшена. Служба безопасности более не может держать оружие на полной боеготовности, однако все еще может держать его на виду. Случайные обыски все еще дозволены.","Внимание! Код безопасности был снижен до Синего.")
 				GLOB.security_level = SEC_LEVEL_BLUE
 
 				post_status("alert", "default")
@@ -61,9 +61,9 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 
 			if(SEC_LEVEL_RED)
 				if(GLOB.security_level < SEC_LEVEL_RED)
-					GLOB.security_announcement_up.Announce("There is an immediate and serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.","Attention! Code Red!")
+					GLOB.security_announcement_up.Announce("На станции присутствует непосредственная, подтвержденная угроза. Служба безопасности имеет право держать оружие в полной боеготовности.Случайные обыски разрешены и рекомендуются.","Внимание! Код Красный!")
 				else
-					GLOB.security_announcement_down.Announce("The station's self-destruct mechanism has been deactivated, but there is still an immediate and serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.","Attention! Code Red!")
+					GLOB.security_announcement_down.Announce("Станционный механзм самоуничтожения был деактивирован, однако все еще присутствует непосредственная, подтвержденная угроза активам и экипажу. Служба безопасности имеет право держать оружие в полной боеготовности.Случайные обыски разрешены и рекомендуются.","Внимание! Код Красный!")
 				GLOB.security_level = SEC_LEVEL_RED
 
 				var/obj/machinery/door/airlock/highsecurity/red/R = locate(/obj/machinery/door/airlock/highsecurity/red) in GLOB.airlocks
@@ -80,7 +80,7 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 						FA.update_icon()
 
 			if(SEC_LEVEL_GAMMA)
-				GLOB.security_announcement_up.Announce("Central Command has ordered the Gamma security level on the station. Security is to have weapons equipped at all times, and all civilians are to immediately seek their nearest head for transportation to a secure location. The station's Gamma armory has been unlocked and is ready for use.","Attention! Gamma security level activated!", new_sound = sound('sound/effects/new_siren.ogg'))
+				GLOB.security_announcement_up.Announce("Центральное Командование отдало приказ об активации кода безопасности Гамма. Служба безопасности обязана быть вооружена и в полной боевой готовности, гражданский экипаж должен немедленно направиться в ближайшее безопасное место. Оружейная кода Гамма разблокированна и готова к использованию.","Внимание! Код безопасности Гамма был активирован!", new_sound = sound('sound/effects/new_siren.ogg'))
 				GLOB.security_level = SEC_LEVEL_GAMMA
 
 				move_gamma_ship()
@@ -105,7 +105,7 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 						FA.update_icon()
 
 			if(SEC_LEVEL_EPSILON)
-				GLOB.security_announcement_up.Announce("Central Command has ordered the Epsilon security level on the station. Consider all contracts terminated.","Attention! Epsilon security level activated!", new_sound = sound('sound/effects/purge_siren.ogg'))
+				GLOB.security_announcement_up.Announce("Центральное Командование авторизовало активацию кода Эпсилон на станции. Элитный отряд быстрого реагирования будет отправлен для неитрализации угрозы и защиты активов корпорации. Экипажу следует сохранять спокойствие и проследовать в ближайшее безопасное место на станции, а затем ожидать указаний от отряда быстрого реагирования.","Внимание! Код Эпсилон был активирован!", new_sound = sound('sound/effects/purge_siren.ogg'))
 				GLOB.security_level = SEC_LEVEL_EPSILON
 
 				post_status("alert", "epsilonalert")
@@ -117,7 +117,7 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 						FA.update_icon()
 
 			if(SEC_LEVEL_DELTA)
-				GLOB.security_announcement_up.Announce("The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.","Attention! Delta security level reached!", new_sound = sound('sound/effects/deltaalarm.ogg'))
+				GLOB.security_announcement_up.Announce("Станционный механизм самоуничтожения был активирован.Всему экипажу надлежит подчиняться любым приказам глав станции. Любое нарушение этих приказов может быть наказуемо немедленной казнью. Это не учебная тревога.","Внимание! Код безопасности Дельта был активирован!", new_sound = sound('sound/effects/deltaalarm.ogg'))
 				GLOB.security_level = SEC_LEVEL_DELTA
 
 				post_status("alert", "deltaalert")
@@ -210,7 +210,7 @@ GLOBAL_DATUM_INIT(security_announcement_down, /datum/announcement/priority/secur
 		if(SEC_LEVEL_EPSILON)
 			return "ЭПСИЛОН"
 		if(SEC_LEVEL_DELTA)
-			return "ДЭЛЬТА"
+			return "ДЕЛЬТА"
 
 /proc/get_security_level_l_range()
 	switch(GLOB.security_level)
