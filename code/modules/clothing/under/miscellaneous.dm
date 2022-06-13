@@ -142,8 +142,8 @@
 	item_state = "eileen_shirt"
 	item_color = "eileen_shirt"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
-	resistance_flags = FIRE_PROOF
-	armor = list("melee" = 20, "bullet" = 5, "laser" = 5, "energy" = 5, "bomb" = 0, "bio" = 50, "rad" = 20, "fire" = 15, "acid" = 15)
+	resistance_flags = FIRE_PROOF|ACID_PROOF
+	armor = list("melee" = 25, "bullet" = 10, "laser" = 10, "energy" = 10, "bomb" = 5, "bio" = 50, "rad" = 20, "fire" = 25, "acid" = 15)
 	has_sensor = FALSE
 	displays_id = 0
 
