@@ -39,6 +39,17 @@
 			if(toggle_sound)
 				playsound(src.loc, "[toggle_sound]", 100, 0, 4)
 
+/obj/item/clothing/head/eileen
+	name = "Crow's hat"
+	desc = "An ancient expensive-looking hat, made with some kind of durable leather of dubious origin."
+	icon_state = "eileen_hat"
+	item_state = "eileen_hat"
+	w_class = WEIGHT_CLASS_NORMAL
+	flags = HEADBANGPROTECT|BLOCKHAIR
+	armor = list("melee" = 30, "bullet" = 25, "laser" = 25,"energy" = 10, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 40, "acid" = 40)
+	flags_inv = HIDEEARS
+	resistance_flags = FIRE_PROOF|ACID_PROOF
+	vision_flags = SEE_MOBS
 
 /obj/item/clothing/head/helmet/visor
 	name = "visor helmet"

@@ -21,6 +21,16 @@
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 25, "bomb" = 50, "bio" = 30, "rad" = 30, "fire" = 90, "acid" = 50)
 	flags = NOSLIP
 
+/obj/item/clothing/shoes/combat/eileen
+	name = "Crow's boots"
+	desc = "Ancient expensive-looking boots made with some kind of durable leather of dubious origins. The solef are covered in a thick layer of faded blood"
+	icon_state = "eileen_boot"
+	item_state = "eileen_boot"
+	permeability_coefficient = 0.01
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	flags = NOSLIP
+	slowdown = -1
+
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"

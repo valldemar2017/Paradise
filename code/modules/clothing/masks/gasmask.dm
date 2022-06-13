@@ -91,6 +91,20 @@
 	item_state = "gas_mask"
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 2, "energy" = 2, "bomb" = 0, "bio" = 75, "rad" = 0, "fire" = 0, "acid" = 0)
 
+/obj/item/clothing/mask/eileen
+	name = "Crow's mask"
+	desc = "An ancient mask made in the likeness of a crow's skull.. Seems to actually be made with bone."
+	icon_state = "eileen_mask"
+	item_state = "eileen_mask"
+	flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+	flags_cover = MASKCOVERSMOUTH|MASKCOVERSEYES
+	w_class = WEIGHT_CLASS_NORMAL
+	armor = list(melee = 15, bullet = 20, laser = 15, energy = 5, bomb = 15, bio = 100, rad = 20, fire = 20, acid = 40)
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	resistance_flags = FIRE_PROOF|ACID_PROOF
+
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."

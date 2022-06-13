@@ -135,6 +135,18 @@
 	item_color = "officer"
 	displays_id = 0
 
+/obj/item/clothing/under/eileen
+	name = "Crow's Shirt"
+	desc = "An ancient expensive-looking set of pants and shirt, feels... Weird"
+	icon_state = "eileen_shirt"
+	item_state = "eileen_shirt"
+	item_color = "eileen_shirt"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	resistance_flags = FIRE_PROOF
+	armor = list("melee" = 20, "bullet" = 5, "laser" = 5, "energy" = 5, "bomb" = 0, "bio" = 50, "rad" = 20, "fire" = 15, "acid" = 15)
+	has_sensor = FALSE
+	displays_id = 0
+
 /obj/item/clothing/under/rank/centcom/representative/New()
 	..()
 	desc = "Gold trim on space-black cloth, this uniform bears [station_name()] on the left shoulder."
