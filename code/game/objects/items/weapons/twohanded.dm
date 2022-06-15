@@ -170,6 +170,66 @@
 	else
 		unwield(user)
 
+
+/obj/item/twohanded/eileen
+	name = "Blades of Mercy"
+	desc = "A weapon befitting a hunter of hunters. These blades will cut deeper the closer to death their quarry is."
+	icon_state = "eileen_blade"
+	item_state = "eileen_blade0"
+	actions_types = list(/datum/action/item_action/eileen_dash)
+	force = 15
+	throwforce = 30
+	armour_penetration = 15
+	sharp = TRUE
+	sharp_when_wielded = TRUE
+	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = SLOT_BELT
+	force_unwielded = 15
+	force_wielded = 25
+	var/mercy_bonus = 20
+	var/coup_de_gras = 40
+	var/jumpdistance = 3 //-1 from to see the actual distance, e.g 4 goes over 3 tiles
+	var/jumpspeed = 5
+	var/recharging_rate = 40 //default 4 seconds between each dash
+	var/recharging_time = 0 //time until next dash
+	attack_verb = list("attacked", "lunged at", "stabbed", "sliced", "cut", "mercy'd")
+	hitsound = "sound/weapons/bladeslice.ogg"
+	max_integrity = 600
+	resistance_flags = LAVA_PROOF|FIRE_PROOF|ACID_PROOF
+
+/obj/item/twohanded/eileen/attack(mob/living/target, mob/living/carbon/user)
+	var/mob/living/L = target
+	var/def_check = L.getarmor(type = "melee")
+	.=..()
+	if(target.health<=20)
+		L.apply_damage(coup_de_gras, BRUTE, blocked = def_check)
+		to_chat(user, "<span class='warning'>[src] rend [target]</span>")
+	else if(target.health<40)
+		L.apply_damage(mercy_bonus, BRUTE, blocked = def_check)
+		to_chat(user, "<span class='warning'>[src] bite deeper into [target]</span>")
+
+/obj/item/twohanded/eileen/update_icon()
+	if(wielded)
+		item_state = "eileen_blade1"
+	else
+		item_state = "eileen_blade0"
+
+/obj/item/twohanded/eileen/eileen_dash/ui_action_click(mob/user, action)
+	if(!isliving(user))
+		return
+
+	if(recharging_time > world.time)
+		to_chat(user, "<span class='warning'>You can't quickstep again right now, your legs need some rest!</span>")
+		return
+
+	var/atom/target = get_edge_target_turf(user, user.dir) //gets the user's direction
+
+	if (user.throw_at(target, jumpdistance, jumpspeed, spin = FALSE, diagonals_first = TRUE))
+		user.visible_message("<span class='warning'>[usr] quicksteps forward!</span>")
+		recharging_time = world.time + recharging_rate
+	else
+		to_chat(user, "<span class='warning'>Something prevents you from dashing forward!</span>")
+
 /*
  * Fireaxe
  */
