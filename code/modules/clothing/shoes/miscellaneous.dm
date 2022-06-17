@@ -26,11 +26,36 @@
 	desc = "Ancient expensive-looking boots made with some kind of durable leather of dubious origins. The soles are covered in a thick layer of faded blood"
 	icon_state = "eileen_boot"
 	item_state = "eileen_boot"
+	var/jumpdistance = 3 //-1 from to see the actual distance, e.g 4 goes over 3 tiles
+	var/jumpspeed = 5
+	var/recharging_rate = 20 //default 6 seconds between each dash
+	var/recharging_time = 0 //time until next dash
 	armor = list("melee" = 30, "bullet" = 30, "laser" = 20, "energy" = 20, "bomb" = 40, "bio" = 40, "rad" = 0, "fire" = 95, "acid" = 65)
 	permeability_coefficient = 0.01
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags = NOSLIP
-	slowdown = -0.4
+	slowdown = -0.5
+
+/obj/item/clothing/shoes/combat/eileen/ui_action_click(mob/user, action)
+	..()
+	if(!isliving(user))
+		return
+	if(!has_gravity(user))
+		to_chat(user, "<span class='warning'> Quickstepping in Zero-G is too dangerous!</span>") //not really, but i can't be assed to make proper code for this
+		return
+
+	if(recharging_time > world.time)
+		to_chat(user, "<span class='warning'>You can't quickstep again right now, your legs need some rest!</span>")
+		return
+
+	var/atom/target = get_edge_target_turf(user, user.dir) //gets the user's direction
+
+	if (user.throw_at(target, jumpdistance, jumpspeed, spin = FALSE, diagonals_first = TRUE))
+		user.visible_message("<span class='warning'>[usr] quicksteps forward!</span>")
+		recharging_time = world.time + recharging_rate
+	else
+		to_chat(user, "<span class='warning'>Something prevents you from dashing forward!</span>")
+
 
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
