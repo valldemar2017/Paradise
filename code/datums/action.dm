@@ -340,6 +340,8 @@
 /datum/action/item_action/flip_cap
 	name = "Flip Cap"
 
+/datum/action/item_action/gun_sheath
+	name = "Explosive drawing"
 /datum/action/item_action/switch_hud
 	name = "Switch HUD"
 

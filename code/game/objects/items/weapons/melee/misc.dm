@@ -50,6 +50,24 @@
 		final_block_chance = 0 //Don't bring a sword to a gunfight
 	return ..()
 
+/obj/item/melee/rapier/murasama
+	name = "HF Murasama"
+	desc = "A high-frequency katana made with exquisite mastery. The blade cracles with violent energy, thirsting for the blood of your enemies"
+	icon_state = "hfmurasama"
+	item_state = "hfmurasama"
+	lefthand_file = 'icons/mob/inhands/64x64_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/64x64_righthand.dmi'
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	flags = CONDUCT
+	w_class = WEIGHT_CLASS_BULKY
+	armour_penetration = 50 //Чуть меньше пробития в обмен на больший шанс блока
+	block_chance = 70
+	origin_tech = "materials=5"
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	resistance_flags = LAVA_PROOF
+
 /obj/item/melee/icepick
 	name = "ice pick"
 	desc = "Used for chopping ice. Also excellent for mafia esque murders."
