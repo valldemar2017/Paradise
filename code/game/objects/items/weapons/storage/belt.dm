@@ -646,6 +646,98 @@
 		var/mob/living/L = loc
 		L.update_inv_belt()
 
+/obj/item/storage/belt/murasama
+	name = "Murasama Gun-Sheath"
+	desc = "A piece of peculiar craftsmanship, it is a katana sheath with a built-in gun mechanism, allowing for violent and explosive drawing of the weapon"
+	icon_state = "hfmurasama_sheath"
+	item_state = "hfmurasama_sheath"
+	storage_slots = 1
+	w_class = WEIGHT_CLASS_BULKY
+	max_w_class = WEIGHT_CLASS_BULKY
+	actions_types = list(/datum/action/item_action/gun_sheath)
+	can_hold = list(/obj/item/melee/rapier/murasama)
+	var/last_activation = 0
+
+/obj/item/storage/belt/murasama/New()
+	..()
+	last_activation = world.time
+	new /obj/item/melee/rapier/murasama(src)
+	update_icon()
+
+/obj/item/storage/belt/murasama/examine(mob/user)
+	. = ..()
+	. += "<span class='notice'>[last_activation>world.time?"It's need another [(last_activation-world.time)/10] seconds to recharge":"It's ready"]</span>"
+/obj/item/storage/belt/murasama/attack_hand(mob/user)
+	if(loc != user)
+		return ..()
+
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	if(H.incapacitated())
+		return
+
+	if(length(contents))
+		var/obj/item/I = contents[1]
+		H.visible_message("<span class='notice'>[H] takes [I] out of [src].</span>", "<span class='notice'>You take [I] out of [src].</span>")
+		H.put_in_hands(I)
+		update_icon()
+	else
+		to_chat(user, "<span class='warning'>[src] is empty!</span>")
+
+/obj/item/storage/belt/murasama/handle_item_insertion(obj/item/W, prevent_warning)
+	if(!..())
+		return
+	playsound(src, 'sound/weapons/blade_sheath.ogg', 20)
+
+/obj/item/storage/belt/murasama/remove_from_storage(obj/item/W, atom/new_location)
+	if(!..())
+		return
+	playsound(src, 'sound/weapons/blade_unsheath.ogg', 20)
+
+/obj/item/storage/belt/murasama/update_icon()
+	. = ..()
+	icon_state = initial(icon_state)
+	item_state = initial(item_state)
+	if(length(contents))
+		icon_state = "[icon_state]-murasama"
+		item_state = "[item_state]-murasama"
+	if(isliving(loc))
+		var/mob/living/L = loc
+		L.update_inv_belt()
+
+/obj/item/storage/belt/murasama/ui_action_click(mob/user, action)
+	if(action == /datum/action/item_action/gun_sheath)
+		if(!isliving(user))
+			return
+
+		if(last_activation>world.time)
+			to_chat(user,"<span class='warning'>Gun mechanism need's time to recharge!</span>")
+			return
+
+		if(!length(contents))
+			to_chat(user,"<span class='warning'>[src] is empty!</span>")
+			playsound(user.loc,'sound/weapons/gunshots/gunshot_strong.ogg',50)
+			last_activation=world.time + 20 SECONDS
+			return
+
+		var/obj/item/melee/rapier/murasama/M = contents[1]
+		if(!user.put_in_hands(M))
+			M.forceMove(get_turf(src))
+			playsound(user.loc,'sound/effects/hf_slash.ogg',50)
+			throw_at(M,5,1)
+			return
+		var/turf/T = get_step(get_turf(src),user.dir)
+		playsound(user.loc,'sound/effects/hf_slash.ogg',50)
+		for(var/mob/living/target in T.contents)
+			M.force = 20
+			target.attackby(M,user)
+			last_activation=world.time + 20 SECONDS
+			M.force = initial(M.force)
+			return
+
+		to_chat(user,"<span class='warning'>You furiously cut through the air!</span>")
+		last_activation=world.time + 20 SECONDS
 // -------------------------------------
 //     Bluespace Belt
 // -------------------------------------
