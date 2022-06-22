@@ -558,43 +558,48 @@
 	var/choice = show_radial_menu(user, src, choices, custom_check = CALLBACK(src, .proc/check_menu, user))
 	if (!choice)
 		return
-	switch (choice)
-		if ("open")
-			if (!state_open)
-				open_machine(drop = FALSE)
-				if (occupant)
-					dump_contents()
-		if ("close")
-			if (state_open)
-				close_machine()
-		if ("disinfect")
-			if (occupant && safeties)
-				return
-			else if (!helmet && !mask && !suit && !storage && !occupant)
-				return
+	if(check_menu(user))
+
+		switch (choice)
+			if ("open")
+				if (!state_open)
+					open_machine(drop = FALSE)
+					if (occupant)
+						dump_contents()
+			if ("close")
+				if (state_open)
+					close_machine()
+			if ("disinfect")
+				if (occupant && safeties)
+					return
+				else if (!helmet && !mask && !suit && !storage && !occupant)
+					return
+				else
+					if (occupant)
+						var/mob/living/mob_occupant = occupant
+						to_chat(mob_occupant, "<span class='warning'>[src]'s confines grow warm, then hot, then scorching. You're being burned [!mob_occupant.stat ? "alive" : "away"]!</span>")
+						cook()
+			if ("lock", "unlock")
+				if (!state_open)
+					locked = !locked
+			if("eject")
+				if(occupant)
+					eject_occupant()
 			else
-				if (occupant)
-					var/mob/living/mob_occupant = occupant
-					to_chat(mob_occupant, "<span class='warning'>[src]'s confines grow warm, then hot, then scorching. You're being burned [!mob_occupant.stat ? "alive" : "away"]!</span>")
-				cook()
-		if ("lock", "unlock")
-			if (!state_open)
-				locked = !locked
-		if("eject")
-			if(occupant)
-				eject_occupant()
-		else
-			var/obj/item/item_to_dispense = vars[choice]
-			if (item_to_dispense)
-				vars[choice] = null
-				user.put_in_hands(item_to_dispense)
-				update_icon()
-			else
-				var/obj/item/in_hands = user.get_active_hand()
-				if (in_hands)
-					attackby(in_hands, user)
-				update_icon()
-	interact(user)
+				var/obj/item/item_to_dispense = vars[choice]
+				if(check_menu(user))
+					if(item_to_dispense)
+						vars[choice] = null
+						user.put_in_hands(item_to_dispense)
+						update_icon()
+						return
+					else
+						var/obj/item/in_hands = user.get_active_hand()
+						if (in_hands)
+							attackby(in_hands, user)
+							update_icon()
+	if(check_menu(user))
+		interact(user)
 
 /obj/machinery/suit_storage_unit/proc/create_silhouette_of(atom/item)
 	var/image/image = image(initial(item.icon), initial(item.icon_state))
