@@ -310,7 +310,7 @@
 				/obj/item/storage/belt/military/assault = 50,
 				/obj/item/clothing/mask/gas/sechailer/swat = 50,
 				/obj/item/clothing/glasses/thermal = 50, // see heat-source mobs through walls. Less powerful than already-available xray.
-				/obj/item/fluff/solgov_spacepod_klt = 50,
+				/obj/item/fluff/solgov_spacepod_kit = 50,
 
 				// Ranged weapons
 				/obj/item/storage/box/enforcer_rubber = 50,
