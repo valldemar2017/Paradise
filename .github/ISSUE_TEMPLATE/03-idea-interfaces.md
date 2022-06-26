@@ -2,7 +2,7 @@
 name: Идея (Интерфейсы)
 about: Гениальная идея с созданием нового интерфейса или переработкой старого
 title: "[Идея]: "
-labels: bug
+labels: Enhancement, TGUI
 assignees: ''
 
 ---

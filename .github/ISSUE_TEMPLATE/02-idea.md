@@ -2,7 +2,7 @@
 name: Идея
 about: "У меня идея! Она крутая! Добавьте пж... \U0001F449\U0001F448"
 title: "[Идея]: "
-labels: ''
+labels: Enhancement
 assignees: ''
 
 ---
