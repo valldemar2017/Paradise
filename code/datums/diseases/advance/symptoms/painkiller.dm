@@ -1,7 +1,7 @@
 /*
 //////////////////////////////////////
 
-Self-Respiration
+Neural Blockade
 
 	Lowers resistance.
 	Decreases stage speed slightly.

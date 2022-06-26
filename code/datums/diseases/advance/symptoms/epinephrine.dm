@@ -26,14 +26,8 @@ Bonus
 /datum/symptom/epinephrine/Activate(datum/disease/advance/A)
 	..()
 	var/mob/living/M = A.affected_mob
-	if(prob(SYMPTOM_ACTIVATION_PROB * 5))
-		switch(A.stage)
-			if(5)
-				if(prob(10))
-					to_chat(M, "<span class='notice'>[pick("Your body feels tough.", "You are feeling on edge.")]</span>")
+	if(prob(SYMPTOM_ACTIVATION_PROB * 0.5) && A.stage == 5)
+		to_chat(M, "<span class='notice'>[pick("Your body feels tough.", "You are feeling on edge.")]</span>")
 	if(A.stage > 4 && M.health <= HEALTH_THRESHOLD_CRIT)
 		M.reagents.add_reagent("epinephrine", 0.5)
-	if(M.reagents.get_reagent_amount("epinephrine") > 20)
-		var/obj/item/organ/internal/heart/heart = M.get_int_organ(/obj/item/organ/internal/heart)
-		heart?.receive_damage(1)
 	return
