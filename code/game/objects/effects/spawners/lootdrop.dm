@@ -183,16 +183,21 @@
 				/obj/item/storage/belt/utility/full/multitool = 150,
 				/obj/item/clothing/gloves/combat = 100,
 				/obj/item/clothing/glasses/welding = 50,
-				/obj/item/reagent_containers/spray/cleaner = 100,
-				/obj/item/clothing/shoes/magboots = 50,
+				/obj/item/clothing/shoes/magboots/syndie/SOLmagboots = 50,
 				/obj/item/soap = 50,
 				/obj/item/clothing/under/syndicate/combat = 50,
-				/obj/item/soap/syndie = 50,
+				/obj/item/soap/syndie/SOLsoap = 50,
 				/obj/item/lighter/zippo/gonzofist = 50,
 				/obj/item/stack/nanopaste = 50,
 				/obj/item/clothing/under/psyjump = 50,
 				/obj/item/immortality_talisman = 50,
-				/obj/item/grenade/clusterbuster/smoke = 50
+				/obj/item/grenade/clusterbuster/smoke = 50,
+				/obj/item/fluff/rapid_wheelchair_kit = 50,
+				/obj/item/fluff/cardgage_helmet_kit = 100,
+				/obj/item/clothing/head/beret/fluff/sigholt = 50,
+				/obj/item/bedsheet/fluff/hugosheet = 40,
+				/obj/item/storage/backpack/fluff/ssscratches_back = 60,
+				/obj/item/clothing/head/wizard/fake/fluff/dreamy = 10
 				)
 
 /obj/effect/spawner/lootdrop/trade_sol/minerals
@@ -274,6 +279,7 @@
 				/obj/item/storage/pill_bottle/random_meds/labelled = 100, // random medical and other chems
 				/obj/item/reagent_containers/glass/bottle/reagent/omnizine = 50,
 				/obj/item/reagent_containers/glass/bottle/reagent/strange_reagent = 50,
+				/obj/item/reagent_containers/applicator/dual/syndi = 40,
 
 				// Surgery
 				/obj/item/scalpel/laser/manager = 100,
@@ -287,7 +293,8 @@
 
 				// Virology
 				/obj/item/reagent_containers/glass/bottle/regeneration = 50,
-				/obj/item/reagent_containers/glass/bottle/sensory_restoration = 50
+				/obj/item/reagent_containers/glass/bottle/sensory_restoration = 50,
+				/obj/item/clothing/suit/space/hardsuit/medical/SOLmedirig = 30
 				)
 
 /obj/effect/spawner/lootdrop/trade_sol/sec
@@ -301,12 +308,14 @@
 				/obj/item/storage/belt/military/assault = 50,
 				/obj/item/clothing/mask/gas/sechailer/swat = 50,
 				/obj/item/clothing/glasses/thermal = 50, // see heat-source mobs through walls. Less powerful than already-available xray.
+				/obj/item/fluff/solgov_spacepod_klt = 50,
 
 				// Ranged weapons
 				/obj/item/storage/box/enforcer_rubber = 50,
 				/obj/item/storage/box/enforcer_lethal = 50,
 				/obj/item/gun/projectile/shotgun/automatic/combat = 50, // combat shotgun, between riot and bulldog in robustness. Not illegal, can be obtained from cargo.
 				/obj/item/gun/projectile/shotgun/automatic/dual_tube = 50, // cycler shotgun, not normally available to crew
+				/obj/item/gun/energy/laser/SOLgov = 60,
 
 				// Cluster grenades
 				/obj/item/grenade/clusterbuster = 50, // cluster flashbang
@@ -317,14 +326,15 @@
 	name = "7. eng gear"
 	loot = list(
 				/obj/item/storage/belt/utility/chief/full = 25,
-				/obj/item/rcd/combat = 25,
+				/obj/item/rcd/combat/SOLgov = 25,
 				/obj/item/rpd/bluespace = 25,
 				/obj/item/tank/emergency_oxygen/double/full = 25,
 				/obj/item/slimepotion/speed = 25,
-				/obj/item/storage/backpack/holding = 25,
+				/obj/item/storage/backpack/holding/satchel = 25,
 				/obj/item/clothing/glasses/meson/night = 25, // NV mesons
 				/obj/item/clothing/glasses/material = 25, // shows objects, but not mobs, through walls
-				/obj/item/grenade/clusterbuster/metalfoam = 25 // cluster metal foam grenade
+				/obj/item/grenade/clusterbuster/metalfoam = 25, // cluster metal foam grenade
+				/obj/item/clothing/suit/space/hardsuit/engine/elite/SOLengirig = 10
 				)
 
 /obj/effect/spawner/lootdrop/trade_sol/largeitem

@@ -1,6 +1,7 @@
 
 #define MATTER_100 100
 #define MATTER_500 500
+#define MATTER_700 700
 
 #define TAB_AIRLOCK_TYPE	1
 #define TAB_AIRLOCK_ACCESS	2
@@ -644,6 +645,15 @@
 	matter = MATTER_500
 	canRwall = TRUE
 
+/obj/item/rcd/combat/SOLgov
+	icon_state = "exp_rcd"
+	item_state = "exp_rcd"
+	name = "industrial RCD"
+	desc = "The pinnacle of usage of compressed matter. Truly, a tool to build cities."
+	max_matter = MATTER_700
+	matter = MATTER_700
+	canRwall = TRUE
+
 /obj/item/rcd_ammo
 	name = "compressed matter cartridge"
 	desc = "Highly compressed matter for the RCD."
@@ -662,3 +672,4 @@
 
 #undef MATTER_100
 #undef MATTER_500
+#undef MATTER_700

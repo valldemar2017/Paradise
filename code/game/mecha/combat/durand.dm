@@ -42,3 +42,10 @@
 	infra_luminosity = 8
 	force = 40
 	wreckage = /obj/structure/mecha_wreckage/durand/old
+
+/obj/mecha/combat/durand/old/SOLgov
+	name = "Durand"
+	desc = "An old, almost ancient model of a third-generation Durand. It was probably used by the Federation in some conflict before. With a fresh coat of paint!"
+	icon_state = "sol_durand"
+	initial_icon = "sol_durand"
+	wreckage = /obj/structure/mecha_wreckage/durand/old/SOLgov
