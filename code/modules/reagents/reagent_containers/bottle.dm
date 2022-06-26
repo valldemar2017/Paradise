@@ -395,3 +395,15 @@
 	desc = "A small bottle containing Bio Virus Antidote Kit."
 	icon_state = "wide_bottle"
 	list_reagents = list("atropine" = 5, "epinephrine" = 5, "salbutamol" = 10, "spaceacillin" = 10)
+
+/obj/item/reagent_containers/glass/bottle/painkiller_symptom
+	name = "Neural Blockade culture bottle"
+	desc = "A small bottle. Contains a sample of a virus that allows the body to produce Hydrocodone"
+	icon_state = "round_bottle"
+	spawned_disease = /datum/disease/advance/painkiller
+
+/obj/item/reagent_containers/glass/bottle/epinephrine_symptom
+	name = "Inotropical Hyperfunction culture bottle"
+	desc = "A small bottle. Contains a sample of a virus that forces the heart to produce epinephrine, when under severe stress"
+	icon_state = "round_bottle"
+	spawned_disease = /datum/disease/advance/epinephrine
