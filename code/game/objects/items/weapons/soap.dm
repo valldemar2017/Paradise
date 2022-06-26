@@ -104,3 +104,7 @@
 	desc = "An untrustworthy bar of soap made of strong chemical agents that dissolve blood faster."
 	icon_state = "soapsyndie"
 	cleanspeed = 10 //much faster than mop so it is useful for traitors who want to clean crime scenes
+
+/obj/item/soap/syndie/SOLsoap
+	desc = "A nice souvenir from the Federation, smells like VICTORY. Oh, and it is great at cleaning too!"
+	icon_state = "SOLsoap"

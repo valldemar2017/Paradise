@@ -1514,6 +1514,29 @@
 	used = 1
 	qdel(src)
 
+/obj/item/fluff/solgov_spacepod_kit
+	name = "Sol.Gov spacepod mod kit"
+	desc = "a kit of tools and a blueprint detailing how to reconfigure a spacepod"
+	icon_state = "modkit"
+
+/obj/item/fluff/solgov_spacepod_kit/afterattack(atom/target, mob/user, proximity)
+	if(!proximity || !ishuman(user) || user.incapacitated())
+		return
+
+	if(!istype(target, /obj/spacepod))
+		to_chat(user, "<span class='warning'>You can't modify [target]!</span>")
+		return
+
+	to_chat(user, "<span class='notice'>You modify the appearance of [target] based on the kit blueprints.</span>")
+	var/obj/spacepod/pod = target
+	pod.icon = 'icons/48x48/custom_pod.dmi'
+	pod.icon_state = "pod_sol"
+	pod.name = "Sol.Gov spacepod"
+	pod.desc = "A modified variant of a spacepod. This kind of model can usually be found near Solar Federation stations."
+	pod.can_paint = FALSE
+	used = 1
+	qdel(src)
+
 /obj/item/bikehorn/fluff/pinkbikehorn //Xerdies: Squiddle Toodle
 	name = "Honkinator5000"
 	desc = "This horn may look ridiculous but is the new hot item for clowns in the Clown Empire. It has a fine print on its side reading: Property of Prince Honktertong the IV"
@@ -1583,7 +1606,7 @@
 	item_state = "asmer_accordion"
 
 
-/obj/item/clothing/head/fluff/pinesalad_horns //Pineapple Salad: Dan Jello 
+/obj/item/clothing/head/fluff/pinesalad_horns //Pineapple Salad: Dan Jello
 	name = "Bluespace Horns"
 	desc = "A pair of fake horns. Now with added bluespace!"
 	icon = 'icons/obj/custom_items.dmi'

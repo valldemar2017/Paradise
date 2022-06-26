@@ -124,3 +124,10 @@
 			..()
 		else
 			to_chat(user, "<span class='notice'>You poke the gem on [src]. Nothing happens.</span>")
+
+/obj/item/clothing/shoes/magboots/syndie/SOLmagboots
+	name = "Sol.Gov magboots"
+	desc = "magboots usually used by Sol.Gov. Engineers, they have a heavy magnetic pull."
+	icon_state = "sol_magboots0"
+	magboot_state = "sol_magboots"
+	origin_tech = "magnets=5,syndicate=1"

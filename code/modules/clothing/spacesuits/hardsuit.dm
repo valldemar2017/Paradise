@@ -249,6 +249,13 @@
 	heat_protection = HEAD												//Uncomment to enable firesuit protection
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
+/obj/item/clothing/head/helmet/space/hardsuit/engine/elite/SOLengirighelmet
+	name = "Sol.Gov hardsuit helmet"
+	desc = "A sleek helmet designed for work in hazardous, low pressure environments, tight and easy to move in."
+	icon_state = "hardsuit0-sol_engihelm"
+	item_state = "sol_engihelm"
+	item_color = "sol_engihelm"
+
 /obj/item/clothing/suit/space/hardsuit/engine/elite
 	icon_state = "hardsuit-white"
 	name = "advanced hardsuit"
@@ -260,6 +267,15 @@
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/engine/elite
 	jetpack = /obj/item/tank/jetpack/suit
 	dog_fashion = null
+
+/obj/item/clothing/suit/space/hardsuit/engine/elite/SOLengirig
+	name = "Sol.Gov hardsuit"
+	desc = "A sleek, advanced suit that can protect the user from most hazardous, low pressure environments, tight and easy to move in"
+	icon_state = "sol_engirig"
+	item_state = "sol_engirig"
+	slowdown = 0
+	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/engine/elite/SOLengirighelmet
+
 
 //Mining hardsuit
 /obj/item/clothing/head/helmet/space/hardsuit/mining
@@ -447,6 +463,13 @@
 	flags = STOPSPRESSUREDMAGE | THICKMATERIAL
 	scan_reagents = 1 //Generally worn by the CMO, so they'd get utility off of seeing reagents
 
+/obj/item/clothing/head/helmet/space/hardsuit/medical/SOLmedirighelmet
+	name = "Sol.Gov medical hardsuit helmet"
+	desc = "A special helmet made of lightweight materials, usually used by Sol.Gov medics that have to work in low-pressure environments"
+	icon_state = "hardsuit0-sol_medihelm"
+	item_state = "sol_medihelm"
+	item_color = "sol_medihelm"
+
 /obj/item/clothing/suit/space/hardsuit/medical
 	icon_state = "hardsuit-medical"
 	name = "medical hardsuit"
@@ -456,6 +479,14 @@
 	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 5, "bomb" = 10, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 75)
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/medical
 	slowdown = 0.5
+
+/obj/item/clothing/suit/space/hardsuit/medical/SOLmedirig
+	name = "Sol.Gov medical hardsuit"
+	desc = "A special hardsuit made of lightweight materials, usually used by Sol.Gov medics that have to work in low-pressure environments"
+	icon_state = "sol_medirig"
+	item_state = "sol_medirig"
+	item_color = "sol_medirig"
+	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/medical/SOLmedirighelmet
 
 	//Security
 /obj/item/clothing/head/helmet/space/hardsuit/security

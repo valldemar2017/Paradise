@@ -62,6 +62,12 @@
 	cant_hold = list(/obj/item/storage/backpack/holding)
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 50)
 
+/obj/item/storage/backpack/holding/satchel
+	name = "Satchel of Holding"
+	desc = "Same as a Bag of Holding really, just different looks"
+	icon_state = "satchel_of_holding"
+	item_state = "holding_satchel"
+
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/storage/backpack/holding))
 		var/response = alert(user, "This creates a singularity, destroying you and much of the station. Are you SURE?","IMMINENT DEATH!", "No", "Yes")

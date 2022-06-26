@@ -10,6 +10,14 @@
 	ammo_x_offset = 1
 	shaded_charge = 1
 
+/obj/item/gun/energy/laser/SOLgov
+	name = "Avenger M7"
+	desc = "An energy-based laser gun that is used by Sol.Gov army. Uses experimental ammo-generation technology"
+	icon_state = "avenger"
+	item_state = "avenger"
+	origin_tech = "combat=7;magnets = 4"
+	selfcharge = 1
+
 /obj/item/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."

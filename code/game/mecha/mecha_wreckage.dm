@@ -211,6 +211,9 @@
 /obj/structure/mecha_wreckage/durand/old
 	icon_state = "old_durand-broken"
 
+/obj/structure/mecha_wreckage/durand/old/SOLgov
+	icon_state = "sol_durand-broken"
+
 /obj/structure/mecha_wreckage/phazon
 	name = "\improper Phazon wreckage"
 	icon_state = "phazon-broken"
