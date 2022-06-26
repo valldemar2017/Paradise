@@ -49,3 +49,17 @@
 		name = "Reality Enhancer"
 		symptoms = list(new/datum/symptom/sensory_restoration)
 	..(process, D, copy)
+
+//Inotropical Hyperfunction
+/datum/disease/advance/epinephrine/New(var/process = 1, var/datum/disease/advance/D, var/copy = 0)
+	if(!D)
+		name = "Inotropical Hyperfunction"
+		symptoms = list(new/datum/symptom/epinephrine)
+	..(process, D, copy)
+
+//Neural Blockade
+/datum/disease/advance/painkiller/New(var/process = 1, var/datum/disease/advance/D, var/copy = 0)
+	if(!D)
+		name = "Neural Blockade"
+		symptoms = list(new/datum/symptom/painkiller)
+	..(process, D, copy)

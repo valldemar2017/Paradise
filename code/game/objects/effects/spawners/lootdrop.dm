@@ -293,6 +293,8 @@
 
 				// Virology
 				/obj/item/reagent_containers/glass/bottle/regeneration = 50,
+				/obj/item/reagent_containers/glass/bottle/painkiller_symptom = 20,
+				/obj/item/reagent_containers/glass/bottle/epinephrine_symptom = 20,
 				/obj/item/reagent_containers/glass/bottle/sensory_restoration = 50,
 				/obj/item/clothing/suit/space/hardsuit/medical/SOLmedirig = 30
 				)
