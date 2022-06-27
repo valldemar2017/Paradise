@@ -344,7 +344,7 @@
 	lootcount = 1
 	loot = list(
 				/obj/machinery/disco = 20,
-				/obj/mecha/combat/durand/old = 20
+				/obj/mecha/combat/durand/old/SOLgov = 20
 				)
 
 /obj/effect/spawner/lootdrop/trade_sol/vehicle
