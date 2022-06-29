@@ -22,6 +22,11 @@
 	else
 		..()
 
+/obj/item/reagent_containers/food/snacks/meat/examine(mob/user)
+	. = ..()
+	.+="<span class='notice'>You remember the basics....</span>"
+	.+="<span class='notice'>You can <b>grill</b> it with <b>salt 1u and pepper 1u</b>.</span>"
+	.+="<span class='notice'>You can <b>cut</b> it."
 /obj/item/reagent_containers/food/snacks/meat/syntiflesh
 	name = "synthetic meat"
 	desc = "A synthetic slab of flesh."
@@ -154,6 +159,13 @@
 	icon_state = "goliathmeat"
 	list_reagents = list("protein" = 3, "toxin" = 5)
 	tastes = list("tough meat" = 1)
+
+/obj/item/reagent_containers/food/snacks/monstermeat/goliath/examine(mob/user)
+	. = ..()
+	if(user && user.job == "Chef")
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>grill</b> it.</span>"
+		.+="<span class='notice'>You can <b>lava</b> it.</span>"
 
 /obj/item/reagent_containers/food/snacks/monstermeat/goliath/burn()
 	visible_message("<span class='notice'>[src] finishes cooking!</span>")
@@ -354,6 +366,12 @@
 	if(reagents)
 		reagents.reaction(hit_atom, REAGENT_TOUCH)
 	qdel(src)
+
+/obj/item/reagent_containers/food/snacks/egg/examine(mob/user)
+	. = ..()
+	.+="<span class='notice'>You remember the basics....</span>"
+	.+="<span class='notice'>You can <b>microwave</b> it with <b>water 5u</b>.</span>"
+	.+="<span class='notice'>You can <b>grill</b> it with <b>salt 1u</b> and <b>pepper 1u</b>.</span>"
 
 /obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W, mob/user, params)
 	if(istype( W, /obj/item/toy/crayon ))

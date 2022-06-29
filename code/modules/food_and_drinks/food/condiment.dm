@@ -113,6 +113,12 @@
 	icon_state = "enzyme"
 	list_reagents = list("enzyme" = 50)
 
+/obj/item/reagent_containers/food/condiment/enzyme/examine(mob/user)
+	. = ..()
+	if(user && user.job == "Chef" && list_reagents.len) //обычный экипаж не умеет делать сыр так-то. Вот ты умеешь? Я нет.
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>mix</b> this with <b>40u milk</b> and <b>5u Enzyme<b> into Cheese Wheel.</span>"
+
 /obj/item/reagent_containers/food/condiment/sugar
 	name = "sugar bottle"
 	desc = "Tasty spacey sugar!"
@@ -163,6 +169,13 @@
 	list_reagents = list("flour" = 30)
 	possible_states = list()
 
+/obj/item/reagent_containers/food/condiment/flour/examine(mob/user)
+	. = ..()
+	.+="<span class='notice'>You remember the basics....</span>"
+	.+="<span class='notice'>You can <b>mix</b> this with <b>10u water</b> and <b>15u flour</b> into <b>dough</b>.</span>"
+	if(user && user.job == "Chef" && list_reagents.len)	//просто лепушку сделать много сможет. А вот кондинтерское тесто уже как бы далеко не всякий
+		.+="<span class='notice'>You can <b>mix</b> this with <b>10u milk</b>, <b>10u flour</b> and <b>5u sugar</b> into <b>pastry dough</b>.</span>"
+
 /obj/item/reagent_containers/food/condiment/soymilk
 	name = "soy milk"
 	desc = "It's soy milk. White and nutritious goodness!"
@@ -178,6 +191,12 @@
 	item_state = "flour"
 	list_reagents = list("rice" = 30)
 	possible_states = list()
+
+/obj/item/reagent_containers/food/condiment/rice/examine(mob/user)
+	. = ..()
+	if(user && user.job == "Chef" && list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>microwave</b> 10u of it with <b>milk 5u</b>.</span>"
 
 /obj/item/reagent_containers/food/condiment/soysauce
 	name = "soy sauce"
