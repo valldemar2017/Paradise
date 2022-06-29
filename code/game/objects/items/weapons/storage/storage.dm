@@ -93,7 +93,7 @@
 		add_fingerprint(user)
 	else if(isobserver(user))
 		show_to(user)
-	return ..()
+	//return ..()	//Вызывает панель с вещами на турфе. Очень лагуче
 
 /obj/item/storage/proc/return_inv()
 	var/list/L = list()
