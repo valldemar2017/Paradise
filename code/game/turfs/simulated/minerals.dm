@@ -75,7 +75,24 @@
 				gets_drilled(user)
 				SSblackbox.record_feedback("tally", "pick_used_mining", 1, P.name)
 	else
-		return attack_hand(user)
+		return dig_into_with_hands(user, I)
+
+/turf/simulated/mineral/attack_hand(mob/user as mob)
+	return dig_into_with_hands(user)
+
+/turf/simulated/mineral/proc/dig_into_with_hands(mob/user, obj/item/item = null)
+	var/dig_time = item ? 200 : 300
+	if(last_act + 50 > world.time) // Prevents message spam
+		return
+	last_act = world.time
+	to_chat(user, "<span class='notice'>You are struggling to break through  \
+			the rock with [item ? item : "your hands"]...</span>")
+
+	if(do_after(user, dig_time, target = src))
+		if(ismineralturf(src)) //sanity check against turf being deleted during digspeed delay
+			to_chat(user, "<span class='notice'>You finish pulling the rocks away.</span>")
+			gets_drilled(user)
+			SSblackbox.record_feedback("tally", "pick_used_mining", 1,)
 
 /turf/simulated/mineral/proc/gets_drilled()
 	if(mineralType && (mineralAmt > 0))
