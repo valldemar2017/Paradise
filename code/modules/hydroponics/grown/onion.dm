@@ -60,6 +60,12 @@
 	gender = PLURAL
 	cooked_type = /obj/item/reagent_containers/food/snacks/onionrings
 
+/obj/item/reagent_containers/food/snacks/onion_slice/examine(mob/user)
+	. = ..()
+	if(user && user.job == "Chef" && list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>grill</b> it</span>"
+
 /obj/item/reagent_containers/food/snacks/onion_slice/red
 	name = "red onion slices"
 	desc = "They shine like exceptionally low quality amethyst."

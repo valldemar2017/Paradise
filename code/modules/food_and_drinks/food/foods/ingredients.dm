@@ -109,6 +109,12 @@
 	list_reagents = list("nutriment" = 6)
 	tastes = list("dough" = 1)
 
+/obj/item/reagent_containers/food/snacks/dough/examine(mob/user)
+	. = ..()
+	.+="<span class='notice'>You remember the basics....</span>"
+	.+="<span class='notice'>You can <b>roll</b> this out into a flat dough using a <b>rolling pin</b>.</span>"
+	.+="<span class='notice'>You can <b>bake</b> it.</span>"
+
 // Dough + rolling pin = flat dough
 /obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/kitchen/rollingpin))
@@ -132,6 +138,11 @@
 	list_reagents = list("nutriment" = 6)
 	tastes = list("dough" = 1)
 
+/obj/item/reagent_containers/food/snacks/sliceable/flatdough/examine(mob/user)
+	. = ..()
+	.+="<span class='notice'>You remember the basics....</span>"
+	.+="<span class='notice'>You can <b>slice</b> it.</span>"
+	.+="<span class='notice'>You can <b>bake</b> it.</span>"
 
 /obj/item/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
@@ -140,6 +151,13 @@
 	icon_state = "doughslice"
 	list_reagents = list("nutriment" = 1)
 	tastes = list("dough" = 1)
+
+
+/obj/item/reagent_containers/food/snacks/doughslice/examine(mob/user)
+	. = ..()
+	if(user&& user.job=="Chef" &&list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>bake</b> it with <b>1u of salt</b>.</span>"
 
 
 ///cookies by Ume
@@ -153,6 +171,12 @@
 	list_reagents = list("nutriment" = 5, "sugar" = 5)
 	tastes = list("dough" = 1, "sugar" = 1)
 
+/obj/item/reagent_containers/food/snacks/cookiedough/examine(mob/user)
+	. = ..()
+	if(user&& user.job=="Chef" &&list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>roll</b> this out into a flat dough using a <b>rolling pin</b>.</span>"
+		.+="<span class='notice'>You can <b>grill</b> it. <b>Without anything</b> and with <b>1 Berries</b> or <b>1 Pile of chocolate</b>.</span>"
 
 /obj/item/reagent_containers/food/snacks/cookiedough/update_icon()
     if(flat)
@@ -190,6 +214,13 @@
 	icon_state = "unbaked_cookies"
 	list_reagents = list("nutriment" = 5, "sugar" = 5)
 
+/obj/item/reagent_containers/food/snacks/rawcookies/examine(mob/user)
+	. = ..()
+	if(user&& user.job=="Chef" &&list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>bake</b> it.</span>"
+		.+="<span class='notice'>You can sprinkle it with 1 Pile of chocolate.</span>"
+
 /obj/item/reagent_containers/food/snacks/rawcookies/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/choc_pile))
 		if(isturf(loc))
@@ -209,6 +240,12 @@
 	icon_state = "unbaked_cookies_choco"
 	list_reagents = list("nutriment" = 5, "sugar" = 5, "chocolate" = 5)
 	tastes = list("dough" = 1, "sugar" = 1, "chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/rawcookies/chocochips/examine(mob/user)
+	. = ..()
+	if(user&& user.job=="Chef" &&list_reagents.len)
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>bake</b> it.</span>"
 
 //////////////////////
 //	Chocolate		//

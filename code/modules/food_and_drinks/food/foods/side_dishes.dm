@@ -11,6 +11,11 @@
 	list_reagents = list("plantmatter" = 3)
 	tastes = list("raw potatoes" = 1)
 
+/obj/item/reagent_containers/food/snacks/rawsticks/examine(mob/user)
+	. = ..()
+	if(user && user.job == "Chef")
+		.+="<span class='notice'>You remember the basics....</span>"
+		.+="<span class='notice'>You can <b>grill</b> it</span>"
 
 //////////////////////
 //		Fried		//
