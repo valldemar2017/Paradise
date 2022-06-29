@@ -171,24 +171,29 @@
 	else if(dirty==100)
 		to_chat(user,"<span class='warning'>This [src] is dirty!<BR>Please clean it before use!</span>")
 	else
-		if(!istype(user))
-			return
-		if(user.incapacitated() || !user.Adjacent(src))
+		if(!check_menu(user))
 			return
 		choices["turn_on"]=icon('icons/mob/radial.dmi', "radial_use")
 		choices["drop_contents"]=icon('icons/mob/radial.dmi', "radial_drop")
 		var/choice = show_radial_menu(user, src, choices,require_near=!issilicon(user))
 		if (!choice)
 			return
-		switch(choice)
-			if("turn_on")
-				cook()
-				return
-			if("drop_contents")
-				dispose()
-				return
+		if(check_menu(user))
+			switch(choice)
+				if("turn_on")
+					cook()
+					return
+				if("drop_contents")
+					dispose()
+					return
 	return
 
+/obj/machinery/kitchen_machine/proc/check_menu(mob/living/user) //TODO: перенести эту проверку в /mob?
+	if(!istype(user))
+		return FALSE
+	if(user.incapacitated() || !user.Adjacent(src))
+		return FALSE
+	return TRUE
 /obj/machinery/kitchen_machine/examine(mob/user)
 	. = ..()
 	var/list/items_counts = new
