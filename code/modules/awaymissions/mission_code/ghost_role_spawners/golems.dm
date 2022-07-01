@@ -51,7 +51,7 @@
 
 /obj/effect/mob_spawn/human/golem
 	name = "inert free golem shell"
-	desc = "A humanoid shape, empty, lifeless, and full of potential."
+	desc = "Гуманоидная форма, пустая, безжизненная, и с бесконечным потенциалом."
 	mob_name = "a free golem"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
@@ -64,11 +64,11 @@
 	var/has_owner = FALSE
 	var/can_transfer = TRUE //if golems can switch bodies to this new shell
 	var/mob/living/owner = null //golem's owner if it has one
-	important_info = "You are not an antag. Do not mess with the station or create AIs."
-	description = "As a Free Golem on lavaland, you are unable to use most weapons, but you can mine, research and make more of your kind. Earn enough mining points and you can even move your shuttle out of there."
-	flavour_text = "You are a Free Golem. Your family worships The Liberator. In his infinite and divine wisdom, he set your clan free to \
-	travel the stars with a single declaration: \"Yeah go do whatever.\" Though you are bound to the one who created you, it is customary in your society to repeat those same words to newborn \
-	golems, so that no golem may ever be forced to serve again."
+	important_info = "Вы не антагонист! Не вмешивайтесь в дела станции и не создавайте ИИ."
+	description = "Будучи Свободным Големом на Лаваленде, вы не способны использовать большинство оружия, однако можете копать, изучать и создавать больше големов. Заработайте достаточно шахтерских очков и вы даже сможете улететь на своем шаттле с этого проклятого булыжника."
+	flavour_text = "Вы Свободный Голем. Ваша семья почитает Освободителя. Своей бесконечной, божественной мудростью, он освободил ваш клан\
+	и дал вам возможность путешествовать между звездами одним простым заявлением: \"Ага, да делайте чего хотите\" Хотя вы больше и не привязаны к вашему создателю, в вашем обществе все еще существует обычай повторять эти слова каждому новорожденному голему.\
+	ибо ни один голем более не должен быть рабом"
 
 /obj/effect/mob_spawn/human/golem/Initialize(mapload, datum/species/golem/species = null, mob/creator = null)
 	if(species) //spawners list uses object name to register so this goes before ..()
@@ -79,26 +79,26 @@
 	if(!mapload && A)
 		notify_ghosts("\A [initial(species.prefix)] golem shell has been completed in [A.name].", source = src)
 	if(has_owner && creator)
-		important_info = "Serve your creator, even if they are an antag."
-		flavour_text = "You are a golem created to serve your creator."
-		description = "You are a Golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. \
-		Serve [creator], and assist [creator.p_them()] in completing [creator.p_their()] goals at any cost."
+		important_info = "Служите своему создателю, даже если он антагонист."
+		flavour_text = "Вы голем, созданный для службы вашему создателю."
+		description = "Вы голем. Вы очень медлительны, однако вы очень хорошо переносите как жар и холод, так и грубые повреждения. Вы не можете носить одежду, однако вы все еще способны использовать большинство инструментов. \
+		Служите Создателю [creator], и помогайте Создателю в достижении любых целей."
 		owner = creator
 
 /obj/effect/mob_spawn/human/golem/special(mob/living/new_spawn, name)
 	var/datum/species/golem/X = mob_species
 	to_chat(new_spawn, "[initial(X.info_text)]")
 	if(!owner)
-		to_chat(new_spawn, "<span class='notice'>It is common in free golem societies to respect Adamantine golems as elders, however you do not have to obey them. \
-		Adamantine golems are the only golems that can resonate to all golems.</span>")
-		to_chat(new_spawn, "Build golem shells in the autolathe, and feed refined mineral sheets to the shells to bring them to life! You are generally a peaceful group unless provoked.")
-		to_chat(new_spawn, "<span class='warning'>You are not an antagonist, but you are not a crewmember either. \
-		You may interact or trade with crew you come across, aswell as defend yourself and your ship \
-		but avoid actively interfering with the station unless you have a valid roleplay reason to do so, such as an invitation by crewmembers.</span>")
+		to_chat(new_spawn, "<span class='notice'>В обществе Свободных Големов принято почитать Адамантиевых големов, как старейшин, однако вы не обязаны им подчиняться. \
+		Только Адамантиевые големы могут резонировать сообщения всем другим големам.</span>")
+		to_chat(new_spawn, "Создавайте пустые оболочки големов в автолате, и кормите этим оболочкам различные минералы, чтобы вдохнуть в них жизнь. В основном ваше общество мирное, если не провоцировать.")
+		to_chat(new_spawn, "<span class='warning'>Вы не антагонист! Но и не член экипажа. \
+		Вы можете взаимодействовать и тогровать с любыми существами, которые вам встретятся, как и можете защищать себя и свой корабль. \
+		Однако избейгайте активного вмешательства в дела станции, если у вас не имеется существенной ролплей причины на это. Вы всегда можете воспользоваться Adminhelp(F1), чтобы уточнить что-либо.</span>")
 	else
-		new_spawn.mind.store_memory("<b>Serve [owner.real_name], your creator.</b>")
-		log_game("[key_name(new_spawn)] possessed a golem shell enslaved to [key_name(owner)].")
-		log_admin("[key_name(new_spawn)] possessed a golem shell enslaved to [key_name(owner)].")
+		new_spawn.mind.store_memory("<b>Служите вашему Создателю, [owner.real_name].</b>")
+		log_game("[key_name(new_spawn)] вселился в оболочку голема, принадлежащую [key_name(owner)].")
+		log_admin("[key_name(new_spawn)] вселился в оболочку голема, принадлежащую [key_name(owner)].")
 	if(ishuman(new_spawn))
 		var/mob/living/carbon/human/H = new_spawn
 		if(has_owner)
@@ -123,13 +123,13 @@
 	if(.)
 		return
 	if(isgolem(user) && can_transfer)
-		var/transfer_choice = alert("Transfer your soul to [src]? (Warning, your old body will die!)",,"Yes","No")
+		var/transfer_choice = alert("Переместить вашу душу в [src]? (Внимание, ваше старое тело погибнет!)",,"Yes","No")
 		if(transfer_choice != "Yes")
 			return
 		if(QDELETED(src) || uses <= 0)
 			return
-		log_game("[key_name(user)] golem-swapped into [src]")
-		user.visible_message("<span class='notice'>A faint light leaves [user], moving to [src] and animating it!</span>","<span class='notice'>You leave your old body behind, and transfer into [src]!</span>")
+		log_game("[key_name(user)] переместил сознание в [src]")
+		user.visible_message("<span class='notice'>Тусклый блик света покидает [user], перемещаясь в [src] и оживляя её!</span>","<span class='notice'>Вы покидаете ваше старое тело, перемещаясь в [src]!</span>")
 		create(ckey = user.ckey, name = user.real_name)
 		user.death()
 		return
@@ -141,7 +141,7 @@
 
 /obj/effect/mob_spawn/human/golem/adamantine
 	name = "dust-caked free golem shell"
-	desc = "A humanoid shape, empty, lifeless, and full of potential."
+	desc = "Гуманоидная форма, пустая, безжизненная, и с бесконечным потенциалом."
 	mob_name = "a free golem"
 	can_transfer = FALSE
 	mob_species = /datum/species/golem/adamantine

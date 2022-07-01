@@ -158,26 +158,26 @@
 
 /obj/item/antag_spawner/slaughter_demon //Warning edgiest item in the game
 	name = "vial of blood"
-	desc = "A magically infused bottle of blood, distilled from countless murder victims. Used in unholy rituals to attract horrifying creatures."
+	desc = "Окутанный магической энергией бутылек крови, дистиллированной из бессчетного числа жертв. Используется в мерзких ритуалах призыва ужасных существ из-за завесы.."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "vial"
-	var/shatter_msg = "<span class='notice'>You shatter the bottle, no \
-		turning back now!</span>"
-	var/veil_msg = "<span class='warning'>You sense a dark presence lurking \
-		just beyond the veil...</span>"
+	var/shatter_msg = "<span class='notice'>Вы разбиваете бутылек, \
+		пути назад больше нет!</span>"
+	var/veil_msg = "<span class='warning'>Вы чувствуете темное присутствие \
+		совсем рядом, за невидимой завесой...</span>"
 	var/objective_verb = "Kill"
 	var/mob/living/demon_type = /mob/living/simple_animal/slaughter
 
 /obj/item/antag_spawner/slaughter_demon/attack_self(mob/user)
 	if(level_blocks_magic(user.z)) //this is to make sure the wizard does NOT summon a demon from the Den..
-		to_chat(user, "<span class='notice'>You should probably wait until you reach the station.</span>")
+		to_chat(user, "<span class='notice'>Лучше стоит подождать, пока вы не доберетесь до станции.</span>")
 		return
 
 	if(used)
-		to_chat(user, "<span class='notice'>This bottle already has a broken seal.</span>")
+		to_chat(user, "<span class='notice'>Печать на этом бутыльке уже сломана.</span>")
 		return
 	used = TRUE
-	to_chat(user, "<span class='notice'>You break the seal on the bottle, calling upon the dire spirits of the underworld...</span>")
+	to_chat(user, "<span class='notice'>Вы разбиваете печать на бутыльке, взывая к неописуемым духам из подземного мира...</span>")
 
 	var/type = "slaughter"
 	if(demon_type == /mob/living/simple_animal/slaughter/laughter)
@@ -193,7 +193,7 @@
 		qdel(src)
 	else
 		used = FALSE
-		to_chat(user, "<span class='notice'>The demons do not respond to your summon. Perhaps you should try again later.</span>")
+		to_chat(user, "<span class='notice'>Демоны игнорируют ваш призыв. Возможно получится позже.</span>")
 
 /obj/item/antag_spawner/slaughter_demon/spawn_antag(client/C, turf/T, type = "", mob/user)
 	var/obj/effect/dummy/slaughter/holder = new /obj/effect/dummy/slaughter(T)
@@ -219,13 +219,13 @@
 
 /obj/item/antag_spawner/slaughter_demon/laughter
 	name = "vial of tickles"
-	desc = "A magically infused bottle of clown love, distilled from \
-		countless hugging attacks. Used in funny rituals to attract \
-		adorable creatures."
+	desc = "Окутанный магической энергией бутылек, полный клоунской любви, дистиллированной из \
+		неисчислимых обнимашек. Используется в милейших ритуалах призыва \
+		милейших существ из-за завесы."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "vialtickles"
-	veil_msg = "<span class='warning'>You sense an adorable presence \
-		lurking just beyond the veil...</span>"
+	veil_msg = "<span class='warning'>Вы чувствуете милейшее присутствие \
+		совсем рядом, за невидимой завесой...</span>"
 	objective_verb = "Hug and tickle"
 	demon_type = /mob/living/simple_animal/slaughter/laughter
 
@@ -233,26 +233,25 @@
 
 /obj/item/antag_spawner/morph
 	name = "vial of ooze"
-	desc = "A magically infused bottle of ooze, distilled by methods rather not be spoken of. Used to awaken an all-consuming monstrosity."
+	desc = "Окутанный магической энергией бутылек жижи, дистиллированной из... А впрочем, лучше не упоминать. Используется для пробуждения всепоглощающего монстра."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "vialooze"
-	var/shatter_msg = "<span class='notice'>You shatter the bottle, no \
-		turning back now!</span>"
-	var/veil_msg = "<span class='warning'>The sludge is awake and seeps \
-		away...</span>"
+	var/shatter_msg = "<span class='notice'>Вы разбиваете бутылек \
+		теперь нет пути назад!</span>"
+	var/veil_msg = "<span class='warning'>Жижа пробуждается и утекает вдаль...</span>"
 	var/objective_verb = "Eat"
 	var/mob/living/morph_type = /mob/living/simple_animal/hostile/morph
 
 /obj/item/antag_spawner/morph/attack_self(mob/user)
 	if(level_blocks_magic(user.z))//this is to make sure the wizard does NOT summon a morph from the Den..
-		to_chat(user, "<span class='notice'>You should probably wait until you reach the station.</span>")
+		to_chat(user, "<span class='notice'>Лучше стоит подождать, пока вы не доберетесь до станции.</span>")
 		return
 
 	if(used)
-		to_chat(user, "<span class='notice'>This bottle already has a broken seal.</span>")
+		to_chat(user, "<span class='notice'>Печать на этом бутыльке уже сломана.</span>")
 		return
 	used = TRUE
-	to_chat(user, "<span class='notice'>You break the seal on the bottle, calling upon the dire sludge to awaken...</span>")
+	to_chat(user, "<span class='notice'>Вы разбиваете печать на бутыльке, взывая к пробуждению мерзопакостной жижи внутри...</span>")
 
 	var/list/candidates = SSghost_spawns.poll_candidates("Do you want to play as a magical morph awakened by [user.real_name]?", ROLE_MORPH, 1, 10 SECONDS, source = morph_type)
 
@@ -265,7 +264,7 @@
 		qdel(src)
 	else
 		used = FALSE
-		to_chat(user, "<span class='notice'>The sludge does not respond to your attempt to awake it. Perhaps you should try again later.</span>")
+		to_chat(user, "<span class='notice'>Жижа не отвечает на ваши призывы к пробуждению. Может быть попробовать позже?.</span>")
 
 /obj/item/antag_spawner/morph/spawn_antag(client/C, turf/T, type = "", mob/user)
 	var/mob/living/simple_animal/hostile/morph/wizard/M = new /mob/living/simple_animal/hostile/morph/wizard(pick(GLOB.xeno_spawn))

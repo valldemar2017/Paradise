@@ -472,14 +472,14 @@
 	name = "bartender sleeper"
 	icon = 'icons/obj/cryogenic2.dmi'
 	icon_state = "sleeper"
-	description = "Stuck on Lavaland, you could try getting back to civilisation...or serve drinks to those that wander by."
-	flavour_text = "You are a space bartender! Time to mix drinks and change lives. Wait, where did your bar just get transported to?"
+	description = "Застряв на Лаваленде, вы могли бы попытаться вернуться в цивилизацию... или продолжить разливать напитки любой страждущей душе, что может здесь появиться."
+	flavour_text = "Вы космический бармен! Пора мешать напитки и изменять жизни. Погодите-ка, куда только что переместился ваш бар?!"
 	assignedrole = "Space Bartender"
 
 /obj/effect/mob_spawn/human/beach/alive/lifeguard
-	flavour_text = "You're a spunky lifeguard! It's up to you to make sure nobody drowns or gets eaten by sharks and stuff. Then suddenly your entire beach was transported to this strange hell.\
-	 You aren't trained for this, but you'll still keep your guests alive!"
-	description = "Try to survive on lavaland with the pitiful equipment of a lifeguard. Or hide in your biodome."
+	flavour_text = "Вы пылкий спасатель! Ваше дело - убедиться в том, чтобы никто не утонул или не был съеден акулами, или типа того... А теперь, неожиданно, весь ваш пляж переместился в этот загадочный ад. \
+	Вас к такому не готовили! Но вы все еще продолжите спасать ваших гостей!"
+	description = "Постарайтесь выжить на Лаваленде, с жалким снаряжением. Или просто прячьтесь на вашем пляже."
 	mob_gender = "female"
 	name = "lifeguard sleeper"
 	id_job = "Lifeguard"
@@ -507,8 +507,8 @@
 	name = "beach bum sleeper"
 	icon = 'icons/obj/cryogenic2.dmi'
 	icon_state = "sleeper"
-	flavour_text = "You are a beach bum! You think something just happened to the beach but you don't really pay too much attention."
-	description = "Try to survive on lavaland or just enjoy the beach, waiting for visitors."
+	flavour_text = "Вы посетитель пляжа! Кажется, что-то произошло с пляжем... Но вам как-то все равно."
+	description = "Постарайтесь выжить на Лаваленде или просто наслаждайтесь пляжем в ожидании посетителей."
 	assignedrole = "Beach Bum"
 
 /datum/outfit/beachbum
@@ -529,8 +529,8 @@
 	roundstart = FALSE
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "remains"
-	description = "Be a spooky scary skeleton."	//not mapped in anywhere so admin spawner, who knows what they'll use this for.
-	flavour_text = "By unknown powers, your skeletal remains have been reanimated! Walk this mortal plain and terrorize all living adventurers who dare cross your path."
+	description = "Стать жутким и ужасным скелетом."	//not mapped in anywhere so admin spawner, who knows what they'll use this for.
+	flavour_text = "Неизвестной силой, ваши костлявые останки снова шевелятся! Гуляйте по этому миру и пугайте любых мясистых путешественников, которые посмеют встретиться вам на пути!"
 	assignedrole = "Skeleton"
 
 /////////////////Officers//////////////////////
