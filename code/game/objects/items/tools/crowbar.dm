@@ -24,6 +24,14 @@
 	item_state = "crowbar_red"
 	force = 8
 
+/obj/item/crowbar/syndie
+	name = "suspicious crowbar"
+	desc = "Lightweight, durable and more convenient crowbar"
+	icon_state = "crowbar_syndie"
+	force = 10
+	toolspeed = 0.7
+	origin_tech = "engineering=2;combat=2"
+
 /obj/item/crowbar/brass
 	name = "brass crowbar"
 	desc = "A brass crowbar. It feels faintly warm to the touch."

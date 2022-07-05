@@ -20,6 +20,12 @@
 	tool_behaviour = TOOL_SCREWDRIVER
 	var/random_color = TRUE //if the screwdriver uses random coloring
 
+/obj/item/screwdriver/syndie
+	name = "suspicious screwdriver"
+	icon_state = "screwdriver_syndie"
+	toolspeed = 0.7
+	random_color = FALSE
+
 /obj/item/screwdriver/nuke
 	name = "screwdriver"
 	desc = "A screwdriver with an ultra thin tip."

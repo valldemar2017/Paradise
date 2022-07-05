@@ -175,6 +175,14 @@
 	update_torch()
 	..()
 
+/obj/item/weldingtool/syndie
+	name="suspicious welding tool"
+	desc = "A more spacious and high-quality welding tool"
+	icon_state = "synwelder"
+	toolspeed = 0.7
+	maximum_fuel = 25
+	materials = list(MAT_METAL=100, MAT_GLASS=100)
+	origin_tech = "engineering=3;plasmatech=3"
 
 /obj/item/weldingtool/largetank
 	name = "industrial welding tool"

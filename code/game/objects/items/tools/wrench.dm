@@ -9,7 +9,7 @@
 	force = 5
 	throwforce = 7
 	usesound = 'sound/items/ratchet.ogg'
-	w_class = WEIGHT_CLASS_SMALL
+	w_class = WEIGHT_CLASS_TINY
 	materials = list(MAT_METAL=150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
@@ -33,6 +33,12 @@
 	icon_state = "wrench_brass"
 	toolspeed = 0.5
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+
+/obj/item/wrench/syndie
+	name = "suspicious wrench"
+	desc = "Practical wrench in red and black tones"
+	toolspeed = 0.7
+	icon_state = "wrench_syndie"
 
 /obj/item/wrench/abductor
 	name = "alien wrench"
