@@ -285,7 +285,7 @@
 				/obj/item/scalpel/laser/manager = 100,
 				/obj/item/organ/internal/heart/gland/ventcrawling = 50,
 				/obj/item/organ/internal/heart/gland/heals = 50,
-				/obj/item/organ/internal/cyberimp/brain/coproccessor = 50,
+
 				// Genetics Research (should really be under science, but I was stuck for items to put in medical)
 				/obj/item/dnainjector/regenerate = 50, // regeneration
 				/obj/item/dnainjector/nobreath = 50,
