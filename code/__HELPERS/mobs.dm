@@ -362,7 +362,7 @@ This is always put in the attack log.
 			drifting = 0
 			user_loc = user.loc
 
-		if((!drifting && user.loc != user_loc) || target.loc != target_loc || (!(user.mind.advanced_mind) && user.get_active_hand() != holding) || user.incapacitated() || user.lying || check_for_true_callbacks(extra_checks))
+		if((!drifting && user.loc != user_loc) || target.loc != target_loc || user.get_active_hand() != holding || user.incapacitated() || user.lying || check_for_true_callbacks(extra_checks))
 			. = 0
 			break
 	if(progress)
@@ -436,7 +436,7 @@ This is always put in the attack log.
 				if(!holding)
 					. = FALSE
 					break
-			if(!user.mind.advanced_mind&&user.get_active_hand() != holding)
+			if(user.get_active_hand() != holding)
 				. = FALSE
 				break
 	if(progress)

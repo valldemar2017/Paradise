@@ -33,24 +33,7 @@
 	to_chat(owner, "<span class='warning'>Your body seizes up!</span>")
 	return stun_amount
 
-/obj/item/organ/internal/cyberimp/brain/coproccessor
-	name = "Neural coprocessor implant"
-	desc = "This neuron-compatible brain implant complements standard brain functions by providing the ability to perform multiple tasks simultaneously"
-	var/multitask = TRUE
-	implant_color = "#00ffff"
-	slot = "brain_proccessor"
-	origin_tech = "programming=5;biotech=5"
-	icon='icons/obj/device.dmi'
-	icon_state = "implant"
-/obj/item/organ/internal/cyberimp/brain/coproccessor/insert(mob/living/carbon/M, special, dont_remove_slot)
-	. = ..()
-	if(M.mind.advanced_mind)
-		to_chat(usr,"<span class='warning'>This brain cannot be made more productive!</span>")
-		return 1
-	M.mind.advanced_mind=TRUE
-/obj/item/organ/internal/cyberimp/brain/coproccessor/remove(mob/living/carbon/M, special)
-	. = ..()
-	M.mind.advanced_mind=FALSE
+
 /obj/item/organ/internal/cyberimp/brain/anti_drop
 	name = "Anti-drop implant"
 	desc = "This cybernetic brain implant will allow you to force your hand muscles to contract, preventing item dropping. Twitch ear to toggle."
