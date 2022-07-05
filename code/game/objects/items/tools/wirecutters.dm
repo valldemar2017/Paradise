@@ -43,6 +43,13 @@
 	playsound(loc, usesound, 50, 1, -1)
 	return BRUTELOSS
 
+/obj/item/wirecutters/syndie
+	name="suspicious wirecutters"
+	desc="sharp diamond-coated wire cutters with a more ergonomic handle"
+	icon_state = "cutters_syndie"
+	toolspeed = 0.7
+	random_color = FALSE
+
 /obj/item/wirecutters/brass
 	name = "brass wirecutters"
 	desc = "A pair of wirecutters made of brass. The handle feels freezing cold to the touch."

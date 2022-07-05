@@ -86,11 +86,11 @@
 
 /obj/item/storage/toolbox/syndicate/New()
 	..()
-	new /obj/item/screwdriver(src, "red")
-	new /obj/item/wrench(src)
-	new /obj/item/weldingtool/largetank(src)
-	new /obj/item/crowbar/red(src)
-	new /obj/item/wirecutters(src, "red")
+	new /obj/item/screwdriver/syndie(src)
+	new /obj/item/wrench/syndie(src)
+	new /obj/item/weldingtool/syndie(src)
+	new /obj/item/crowbar/syndie(src)
+	new /obj/item/wirecutters/syndie(src)
 	new /obj/item/multitool(src)
 	new /obj/item/clothing/gloves/combat(src)
 
