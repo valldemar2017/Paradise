@@ -98,19 +98,19 @@
 
 	var/color = mix_color_from_reagents(chemholder.reagents.reagent_list)
 
-	for(var/x in 0 to 99)
-		for(var/i = 0, i < rand(2, 6), i++)
-			if(effect_range < 3)
-				new /obj/effect/particle_effect/chem_smoke/small(location, color)
-			else
-				new /obj/effect/particle_effect/chem_smoke(location, color)
+	if(!locate(/obj/effect/particle_effect/chem_smoke) in location)
+		for(var/x in 0 to 99)
+			addtimer(CALLBACK(src, .proc/SmokeEffects, effect_range, color), 1 * x, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	for(var/x in 0 to 10)
+		addtimer(CALLBACK(src, .proc/SmokeEm, effect_range), 1 SECONDS * x, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	QDEL_IN(src, 10 SECONDS)
 
-		if(x % 10 == 0) //Once every 10 ticks.
-			INVOKE_ASYNC(src, .proc/SmokeEm, effect_range)
-
-		sleep(1)
-	qdel(src)
-
+/datum/effect_system/smoke_spread/chem/proc/SmokeEffects(effect_range, color)
+	for(var/i = 0, i < rand(2, 6), i++)
+		if(effect_range < 3)
+			new /obj/effect/particle_effect/chem_smoke/small(location, color)
+		else
+			new /obj/effect/particle_effect/chem_smoke(location, color)
 
 /datum/effect_system/smoke_spread/chem/proc/SmokeEm(effect_range = 2)
 	for(var/atom/A in view(effect_range, get_turf(location)))
