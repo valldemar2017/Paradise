@@ -1931,6 +1931,54 @@ GLOBAL_LIST_INIT(all_supply_groups, list(SUPPLY_EMERGENCY,SUPPLY_SECURITY,SUPPLY
 					/obj/machinery/snow_machine
 					)
 	special = TRUE
+///////////// Flags
+
+/datum/supply_packs/misc/com_flag
+	name = "Command Flag"
+	contains = list(/obj/item/flag/command)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	access = ACCESS_HEADS
+
+/datum/supply_packs/misc/sec_flag
+	name = "Security Flag"
+	contains = list(/obj/item/flag/sec)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "security flag crate"
+	access = ACCESS_SECURITY
+
+/datum/supply_packs/misc/med_flag
+	name = "Medical Flag"
+	contains = list(/obj/item/flag/med)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "medical flag crate"
+	access = ACCESS_MEDICAL
+
+/datum/supply_packs/misc/eng_flag
+	name = "Atmospherics Flag"
+	contains = list(/obj/item/flag/atmos)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "atmospherics flag crate"
+	access = ACCESS_ATMOSPHERICS
+
+/datum/supply_packs/misc/rnd_flag
+	name = "Science Flag"
+	contains = list(/obj/item/flag/rnd)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "science flag crate"
+	access = ACCESS_RESEARCH
+
+/datum/supply_packs/misc/cargo_flag
+	name = "Cargo Flag"
+	contains = list(/obj/item/flag/cargo)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "cargo flag crate"
+	access = ACCESS_CARGO
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Vending /////////////////////////////////////////
