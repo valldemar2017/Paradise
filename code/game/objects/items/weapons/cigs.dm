@@ -19,6 +19,8 @@ LIGHTERS ARE IN LIGHTERS.DM
 	throw_speed = 0.5
 	item_state = "cigoff"
 	slot_flags = SLOT_EARS|SLOT_MASK
+	flags = SPACEACTION
+	action_type = /datum/long_item_action/cigarette
 	w_class = WEIGHT_CLASS_TINY
 	body_parts_covered = null
 	attack_verb = null
@@ -176,7 +178,7 @@ LIGHTERS ARE IN LIGHTERS.DM
 	if(reagents.total_volume <= 0 || smoketime < 1)
 		die()
 		return
-	smoke()
+	// smoke()
 
 
 /obj/item/clothing/mask/cigarette/attack_self(mob/user)
@@ -206,6 +208,8 @@ LIGHTERS ARE IN LIGHTERS.DM
 				to_chat(C, "<span class='notice'>Your [name] loses its flavor.</span>")
 		else // else just remove some of the reagents
 			reagents.remove_any(REAGENTS_METABOLISM)
+	var/mob/living/carbon/C = loc
+	to_chat(C,"<span class='notice'>Вы делаете затяжку</span>")
 
 /obj/item/clothing/mask/cigarette/proc/die()
 	var/turf/T = get_turf(src)
@@ -439,3 +443,18 @@ LIGHTERS ARE IN LIGHTERS.DM
 			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
 	else
 		..()
+
+
+/datum/long_item_action/cigarette
+	time = 20
+
+/obj/item/clothing/mask/cigarette/key_hold_action(var/mob/user)
+	..()
+	if(user)
+		if(!action)
+			action = new action_type(user,src,new_action = CALLBACK(src,/obj/item/clothing/mask/cigarette.proc/smoke))
+			action.fire()
+			world.log<<"СОздана новая long_action для [src]"
+			return
+
+
