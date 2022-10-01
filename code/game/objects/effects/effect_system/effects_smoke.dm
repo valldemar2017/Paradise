@@ -208,3 +208,10 @@
 
 /datum/effect_system/smoke_spread/sleeping
 	effect_type = /obj/effect/particle_effect/smoke/sleeping
+
+/////////////////////////////////////////////
+// Chem smoke
+/////////////////////////////////////////////
+/datum/effect_system/smoke_spread/chem_small
+	effect_type = /obj/effect/particle_effect/chem_smoke/small
+

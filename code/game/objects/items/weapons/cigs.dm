@@ -32,6 +32,7 @@ LIGHTERS ARE IN LIGHTERS.DM
 	var/lastHolder = null
 	var/smoketime = 150
 	var/chem_volume = 60
+	var/last_act_cigs = 0
 	var/list/list_reagents = list("nicotine" = 40)
 	var/first_puff = TRUE // the first puff is a bit more reagents ingested
 	sprite_sheets = list(
@@ -202,14 +203,23 @@ LIGHTERS ARE IN LIGHTERS.DM
 		if(is_being_smoked) // if it's being smoked, transfer reagents to the mob
 			var/mob/living/carbon/C = loc
 			for(var/datum/reagent/R in reagents.reagent_list)
-				reagents.trans_id_to(C, R.id, first_puff ? 1 : max(REAGENTS_METABOLISM / reagents.reagent_list.len, 0.1)) //transfer at least .1 of each chem
+				reagents.trans_id_to(C, R.id, first_puff ? 1 : max(REAGENTS_METABOLISM / reagents.reagent_list.len, 0.1)) //transfer at least .1 of each chem гы
 			first_puff = FALSE
 			if(!reagents.total_volume) // There were reagents, but now they're gone
 				to_chat(C, "<span class='notice'>Your [name] loses its flavor.</span>")
 		else // else just remove some of the reagents
 			reagents.remove_any(REAGENTS_METABOLISM)
-	var/mob/living/carbon/C = loc
-	to_chat(C,"<span class='notice'>Вы делаете затяжку</span>")
+	// var/mob/living/carbon/C = loc
+	// to_chat(C,"<span class='notice'>Вы делаете затяжку</span>")
+
+/obj/item/clothing/mask/cigarette/proc/effect_smoke()
+	if(prob(15))
+		world.log<<"тут должен быть дымок"
+		var/datum/effect_system/smoke_spread/chem_small/smoke = new
+		smoke.set_up(5, 0, src.loc)
+		smoke.start()
+		playsound(src.loc, 'sound/effects/space_wind.ogg', 50, 2)
+
 
 /obj/item/clothing/mask/cigarette/proc/die()
 	var/turf/T = get_turf(src)
@@ -446,15 +456,53 @@ LIGHTERS ARE IN LIGHTERS.DM
 
 
 /datum/long_item_action/cigarette
-	time = 20
+	time = 45
+
+/datum/long_item_action/cigarette/start()
+	..()
+	var/mob/living/carbon/C = user
+	to_chat(C,"<span class='notice'>Вы делаете затяжку.</span>")
+	if(!C||!master_item)
+		return
+	C.drop_item()
+	if(C.equip_to_slot_if_possible(master_item,slot_wear_mask))
+		return 1
+
+	return 0
+
+
+/datum/long_item_action/cigarette/finish()
+	..()
+	var/mob/living/carbon/C = user
+	if(!C||!master_item)
+		return
+	C.unEquip(master_item)
+	C.put_in_hands(master_item)
+	C.update_icons()
+	if(prob(75))
+		to_chat(C, "<span class= 'warning'>Ох чёрт слишком сильно затянулся!</span>")
+		C.emote("cough")
+
+/datum/long_item_action/cigarette/fail()
+	..()
+	var/mob/living/carbon/C = user
+	if(!C||!master_item)
+		return
+	C.unEquip(master_item)
+	C.put_in_hands(master_item)
+	C.update_icons()
 
 /obj/item/clothing/mask/cigarette/key_hold_action(var/mob/user)
 	..()
 	if(user)
 		if(!action)
+			if(last_act_cigs + 20 > world.time) // Prevents message spam
+				return
+			last_act_cigs = world.time
 			action = new action_type(user,src,new_action = CALLBACK(src,/obj/item/clothing/mask/cigarette.proc/smoke))
 			action.fire()
-			world.log<<"СОздана новая long_action для [src]"
+			smoke()
+			effect_smoke()
+			world.log<<"Создана новая long_action для [src]"
 			return
-
 
