@@ -21,6 +21,8 @@
 	extra_checks = checks
 	progress = new(user, time, user)
 	last_key_press = world.time
+	if(!start())
+		fail()
 
 /datum/long_item_action/proc/fire()
 	set waitfor = FALSE
@@ -37,11 +39,14 @@
 	progress.update(world.time - starttime)
 	sleep(1)
 
-	if(!user || !master_item ||master_item.loc != item_loc || user.get_active_hand() != master_item || user.incapacitated()||!user.client.keys_held["Space"])
+	if(!user || !master_item /*||master_item.loc != item_loc || user.get_active_hand() != master_item */|| user.incapacitated(ignore_lying = TRUE)||!user.client.keys_held["Space"])
 		fail()
 		return
 	fire()
 
+
+/datum/long_item_action/proc/start()
+	world.log<<"start [src]"
 
 /datum/long_item_action/proc/finish()
 	world.log<<"finish [src]"
@@ -55,4 +60,3 @@
 	master_item.action = null
 	qdel(progress)
 	qdel(src)
-
