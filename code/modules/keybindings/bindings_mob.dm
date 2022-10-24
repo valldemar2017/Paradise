@@ -58,10 +58,9 @@
 				return
 			if("Space")
 				var/obj/item/I = get_active_hand()
-				if(I.flags&SPACEACTION)
+				if(I?.flags&SPACEACTION)
 					I.key_hold_action(src)
 					return
-				world.log<<"У [src] отсутствуетв флаг!"
 				return
 			if("Q", "Northwest") // Northwest is Home
 				var/obj/item/I = get_active_hand()

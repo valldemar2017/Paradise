@@ -1,5 +1,10 @@
 //TODO: переназвать всё правильно. Добавить доп. проверки
-/datum/long_item_action
+
+#define SPACEBAR_ACTION_NEED_HOLD (1<<1)
+#define SPACEBAR_ACTION_NOT_ITEM_ACTION (1<<2)
+#define SPACEBAR_ACTION_NO_PRESS_NEEDED (1<<3) //Action starts and continue activation without pressing spacebar. Maybe some items ideas wiil be requires it ¯\_(ツ)_/¯
+
+/datum/spacebar_action
 	var/obj/item/master_item
 	var/datum/progressbar/progress
 	var/endtime
@@ -9,9 +14,10 @@
 	var/datum/callback/action
 	var/list/extra_checks
 	var/item_loc
-	var/last_key_press
+	var/action_flags
+	var/proccesing = FALSE
 
-/datum/long_item_action/New(var/mob/_user,var/item,var/list/checks = list(),var/new_action)
+/datum/spacebar_action/New(var/mob/_user,var/item,var/list/checks = list(),var/new_action)
 	user = _user
 	master_item = item
 	item_loc = master_item.loc
@@ -20,11 +26,11 @@
 	action = new_action
 	extra_checks = checks
 	progress = new(user, time, user)
-	last_key_press = world.time
 	if(!start())
 		fail()
+	proccesing=TRUE
 
-/datum/long_item_action/proc/fire()
+/datum/spacebar_action/proc/fire()
 	set waitfor = FALSE
 	if(world.time > endtime)
 		finish()
@@ -39,24 +45,31 @@
 	progress.update(world.time - starttime)
 	sleep(1)
 
-	if(!user || !master_item /*||master_item.loc != item_loc || user.get_active_hand() != master_item */|| user.incapacitated(ignore_lying = TRUE)||!user.client.keys_held["Space"])
+	if(!user || (!(action_flags&SPACEBAR_ACTION_NOT_ITEM_ACTION) && !master_item)|| user.incapacitated(ignore_lying = TRUE)||(!(action_flags&SPACEBAR_ACTION_NO_PRESS_NEEDED)&&!user.client.keys_held["Space"])||!proccesing)
 		fail()
 		return
 	fire()
 
 
-/datum/long_item_action/proc/start()
-	world.log<<"start [src]"
+/datum/spacebar_action/proc/start()
+	log_admin("[user] started empty spacebar action: [src]")
+	log_debug("[user] started empty spacebar action: [src]")
 
-/datum/long_item_action/proc/finish()
-	world.log<<"finish [src]"
+/datum/spacebar_action/proc/finish()
+	proccesing=FALSE
+	log_admin("[user] successfuly finished empty spacebar action: [src]")
+	log_debug("[user] successfuly finished: [src]")
 	action.Invoke()
-	master_item.action = null
+	if(master_item)
+		master_item.spc_action = null
 	qdel(progress)
 	qdel(src)
 
-/datum/long_item_action/proc/fail()
-	world.log<<"failed [src]"
-	master_item.action = null
+/datum/spacebar_action/proc/fail()
+	proccesing=FALSE
+	log_admin("[user] сompleted unsuccessfully empty spacebar action: [src]")
+	log_debug("[user] сompleted unsuccessfully finished: [src]")
+	if(master_item)
+		master_item.spc_action = null
 	qdel(progress)
 	qdel(src)
