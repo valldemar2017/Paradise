@@ -20,7 +20,7 @@ LIGHTERS ARE IN LIGHTERS.DM
 	item_state = "cigoff"
 	slot_flags = SLOT_EARS|SLOT_MASK
 	flags = SPACEACTION
-	action_type = /datum/long_item_action/cigarette
+	spc_action_type = /datum/spacebar_action/cigarette
 	w_class = WEIGHT_CLASS_TINY
 	body_parts_covered = null
 	attack_verb = null
@@ -179,7 +179,7 @@ LIGHTERS ARE IN LIGHTERS.DM
 	if(reagents.total_volume <= 0 || smoketime < 1)
 		die()
 		return
-	// smoke()
+	smoke()
 
 
 /obj/item/clothing/mask/cigarette/attack_self(mob/user)
@@ -209,12 +209,9 @@ LIGHTERS ARE IN LIGHTERS.DM
 				to_chat(C, "<span class='notice'>Your [name] loses its flavor.</span>")
 		else // else just remove some of the reagents
 			reagents.remove_any(REAGENTS_METABOLISM)
-	// var/mob/living/carbon/C = loc
-	// to_chat(C,"<span class='notice'>Вы делаете затяжку</span>")
 
 /obj/item/clothing/mask/cigarette/proc/effect_smoke()
 	if(prob(15))
-		world.log<<"тут должен быть дымок"
 		var/datum/effect_system/smoke_spread/chem_small/smoke = new
 		smoke.set_up(5, 0, src.loc)
 		smoke.start()
@@ -230,6 +227,8 @@ LIGHTERS ARE IN LIGHTERS.DM
 		var/mob/living/M = loc
 		to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
 		M.unEquip(src, 1)		//Force the un-equip so the overlays update
+	if(spc_action)
+		spc_action.master_item = null
 	STOP_PROCESSING(SSobj, src)
 	qdel(src)
 
@@ -455,13 +454,12 @@ LIGHTERS ARE IN LIGHTERS.DM
 		..()
 
 
-/datum/long_item_action/cigarette
+/datum/spacebar_action/cigarette
 	time = 45
 
-/datum/long_item_action/cigarette/start()
+/datum/spacebar_action/cigarette/start()
 	..()
 	var/mob/living/carbon/C = user
-	to_chat(C,"<span class='notice'>Вы делаете затяжку.</span>")
 	if(!C||!master_item)
 		return
 	C.drop_item()
@@ -470,20 +468,32 @@ LIGHTERS ARE IN LIGHTERS.DM
 
 	return 0
 
+/datum/spacebar_action/cigarette/fire()
+	..()
+	var/obj/item/clothing/mask/cigarette/C = master_item
+	if(prob(20))
+		C.smoke()
 
-/datum/long_item_action/cigarette/finish()
+/datum/spacebar_action/cigarette/finish()
 	..()
 	var/mob/living/carbon/C = user
 	if(!C||!master_item)
 		return
 	C.unEquip(master_item)
-	C.put_in_hands(master_item)
+	if(master_item)
+		C.put_in_hands(master_item)
 	C.update_icons()
-	if(prob(75))
-		to_chat(C, "<span class= 'warning'>Ох чёрт слишком сильно затянулся!</span>")
+	var/obj/item/clothing/mask/cigarette/item = master_item
+	item.smoke()
+	item.effect_smoke()
+	if(prob(20))
 		C.emote("cough")
 
-/datum/long_item_action/cigarette/fail()
+	//[OLD] if(prob(75))
+	// 	to_chat(C, "<span class= 'warning'>Ох чёрт слишком сильно затянулся!</span>")
+	// 	C.emote("cough")
+
+/datum/spacebar_action/cigarette/fail()
 	..()
 	var/mob/living/carbon/C = user
 	if(!C||!master_item)
@@ -493,16 +503,15 @@ LIGHTERS ARE IN LIGHTERS.DM
 	C.update_icons()
 
 /obj/item/clothing/mask/cigarette/key_hold_action(var/mob/user)
-	..()
 	if(user)
-		if(!action)
-			if(last_act_cigs + 20 > world.time) // Prevents message spam
+		if(lit)
+			if(!spc_action)
+				if(last_act_cigs + 20 > world.time) // Prevents message spam
+					return
+				last_act_cigs = world.time
+				spc_action = new spc_action_type(user,src,new_action = CALLBACK(src,/obj/item/clothing/mask/cigarette.proc/smoke))
+				spc_action.fire()
+				smoke()
+				effect_smoke()
 				return
-			last_act_cigs = world.time
-			action = new action_type(user,src,new_action = CALLBACK(src,/obj/item/clothing/mask/cigarette.proc/smoke))
-			action.fire()
-			smoke()
-			effect_smoke()
-			world.log<<"Создана новая long_action для [src]"
-			return
 
