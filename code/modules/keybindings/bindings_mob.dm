@@ -56,6 +56,12 @@
 			if("Y", "Z", "Southeast")	// Southeast is Page-down
 				mode()					// attack_self(). No idea who came up with "mode()"
 				return
+			if("Space")
+				var/obj/item/I = get_active_hand()
+				if(I?.flags&SPACEACTION)
+					I.key_hold_action(src)
+					return
+				return
 			if("Q", "Northwest") // Northwest is Home
 				var/obj/item/I = get_active_hand()
 				if(!I)

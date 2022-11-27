@@ -24,6 +24,7 @@
 
 #define DROPDEL					16384	// When dropped, it calls qdel on itself
 
+#define SPACEACTION 			(2<<16)
 
 /* Secondary atom flags, for the flags_2 var, denoted with a _2 */
 

@@ -70,6 +70,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /image, image("icon" = 'icons/goonstation/effect
 	// non-clothing items
 	var/datum/dog_fashion/dog_fashion = null
 
+	var/datum/spacebar_action/spc_action_type
+	//var/datum/long_item/action/action
+	var/datum/spacebar_action/spc_action
 	var/mob/thrownby = null
 
 	//So items can have custom embedd values
@@ -687,4 +690,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /image, image("icon" = 'icons/goonstation/effect
 		owner.update_inv_back()
 	if(flags & SLOT_PDA)
 		owner.update_inv_wear_pda()
+
+
+/obj/item/proc/key_hold_action(var/mob/user)
+
 
