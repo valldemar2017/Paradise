@@ -30,7 +30,9 @@
 		/obj/item/tank,
 		/obj/item/circuitboard,
 		/obj/item/stack/tile/light,
-		/obj/item/stack/ore/bluespace_crystal
+		/obj/item/stack/ore/bluespace_crystal,
+		/obj/item/fuse,
+		/obj/item/fuse/bluespace
 	)
 
 	//Item currently being held.

@@ -113,6 +113,8 @@
 	// Nightshift
 	var/nightshift_lights = FALSE
 	var/last_nightshift_switch = 0
+	var/obj/item/fuse/fuse = null
+
 
 /obj/machinery/power/apc/worn_out
 	name = "\improper Worn out APC"
@@ -274,9 +276,9 @@
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
 
-		status_overlays_charging[1] = image(icon, "apco3-0")
-		status_overlays_charging[2] = image(icon, "apco3-1")
-		status_overlays_charging[3] = image(icon, "apco3-2")
+		status_overlays_charging[1] = image(icon, fuse? "apco3-0-p": "apco3-0")
+		status_overlays_charging[2] = image(icon, fuse? "apco3-1-p": "apco3-1")
+		status_overlays_charging[3] = image(icon, fuse? "apco3-2-p": "apco3-2")
 
 		status_overlays_equipment[1] = image(icon, "apco0-0") // 0=red, 1=green, 2=blue
 		status_overlays_equipment[2] = image(icon, "apco0-1")
@@ -463,6 +465,20 @@
 	if(issilicon(user) && get_dist(src, user) > 1)
 		return attack_hand(user)
 
+	else if (isnull(fuse) && istype(W, /obj/item/fuse) && opened)
+		if(has_electronics == 0)
+			to_chat(user, "<span class='warning'>There is nothing to screw into.</span>")
+			return
+		if(user.drop_item())
+			W.forceMove(src)
+			fuse = W
+			user.visible_message(\
+				"[user.name] has inserted the fuse to [name]!",\
+				"<span class='notice'>You insert the fuse.</span>")
+			playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
+			update_icon(TRUE)
+			return
+
 	else if	(istype(W, /obj/item/stock_parts/cell) && opened)	// trying to put a cell inside
 		if(cell)
 			to_chat(user, "<span class='warning'>There is a power cell already installed!</span>")
@@ -629,6 +645,10 @@
 	if(!I.use_tool(src, user, 0, volume = I.tool_volume))
 		return
 	else if(opened)
+		if(fuse)
+			fuse.forceMove(loc)
+			fuse = null
+			return
 		if(cell && !(stat & MAINT))
 			to_chat(user, "<span class='warning'>Close the APC first!</span>") //Less hints more mystery!
 			return
@@ -651,6 +671,8 @@
 		panel_open = !panel_open
 		to_chat(user, "The wires have been [panel_open ? "exposed" : "unexposed"]")
 		update_icon()
+	if(opened && fuse)
+		fuse.forceMove(loc)
 
 
 /obj/machinery/power/apc/wirecutter_act(mob/living/user, obj/item/I)
@@ -816,6 +838,14 @@
 	data["malfStatus"] = get_malf_status(user)
 	data["nightshiftLights"] = nightshift_lights
 
+	var/fuseStatus = 0
+	if(!isnull(fuse))
+		fuseStatus = 1
+	if(istype(fuse,/obj/item/fuse/bluespace))
+		fuseStatus = 2
+
+	data["fuseStatus"] = fuseStatus
+
 	var/powerChannels[0]
 	powerChannels[++powerChannels.len] = list(
 		"title" = "Equipment",
@@ -924,7 +954,7 @@
 		return locked
 
 /obj/machinery/power/apc/ui_act(action, params)
-	if(..() || !can_use(usr, TRUE) || (locked && !usr.has_unlimited_silicon_privilege && (action != "toggle_nightshift") && !usr.can_admin_interact()))
+	if(..() || !can_use(usr, TRUE) || (locked && !usr.has_unlimited_silicon_privilege && (action != "toggle_nightshift") && (action != "fuse") && !usr.can_admin_interact()))
 		return
 	. = TRUE
 	switch(action)
@@ -951,6 +981,10 @@
 			set_nightshift(!nightshift_lights)
 		if("charge")
 			chargemode = !chargemode
+		if("fuse")
+			if(!isnull(fuse) && istype(fuse,/obj/item/fuse/bluespace))
+				if(!operating)
+					toggle_breaker(usr)
 		if("channel")
 			if(params["eqp"])
 				equipment = setsubsystem(text2num(params["eqp"]))
@@ -1373,6 +1407,25 @@
 	if(!wires.is_cut(WIRE_AI_CONTROL))
 		aidisabled = FALSE
 		updateDialog()
+
+/obj/machinery/power/apc/proc/fuse_burnout()
+	if(isnull(fuse))
+		return FALSE
+
+	if(istype(fuse,/obj/item/fuse/bluespace))
+		if(operating)
+			toggle_breaker()
+	else
+		fuse.forceMove(loc)
+		qdel(fuse)
+		fuse = null
+		var/obj/item/fakeartefact/fuse/F = new(loc)
+		var/turf/T = get_edge_target_turf(loc, reverse_direction(dir))
+		F.throw_at(T, 1, 1)
+		playsound(loc, 'sound/machines/terminal_button08.ogg', 50, TRUE)
+		update_icon(TRUE)
+
+	return TRUE
 
 #undef APC_UPDATE_ICON_COOLDOWN
 

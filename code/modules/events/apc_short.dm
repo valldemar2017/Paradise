@@ -36,11 +36,15 @@
 
 	// break APC_BREAK_PROBABILITY% of all of the APCs on the station
 	var/affected_apc_count = 0
+	var/protected_apc_count = 0
 	for(var/thing in GLOB.apcs)
 		var/obj/machinery/power/apc/C = thing
 		// skip any APCs that are too critical to disable
 		var/area/current_area = get_area(C)
 		if((current_area.type in skipped_areas_apc) || !is_station_level(C.z))
+			continue
+		if(C.fuse && C.fuse_burnout())
+			protected_apc_count++
 			continue
 		// if we are going to break this one
 		if(prob(APC_BREAK_PROBABILITY))
@@ -56,7 +60,7 @@
 			// no matter what, ensure the area knows something happened to the power
 			current_area.power_change()
 			affected_apc_count++
-	log_and_message_admins("APC Short event shorted out [affected_apc_count] APCs.")
+	log_and_message_admins("APC Short event shorted out [affected_apc_count] APCs. Protected by fuse: [protected_apc_count] APCs.")
 
 /proc/power_restore(announce=TRUE)
 	if(announce)

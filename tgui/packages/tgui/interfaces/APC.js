@@ -54,6 +54,20 @@ const malfMap = {
     action: 'occupy',
   },
 };
+const fuseStatusMap = {
+  0: {
+    color: "bad",
+    statusText: "Not installed",
+  },
+  1: {
+    color: "good",
+    statusText: "Installed",
+  },
+  2: {
+    color: "blue",
+    statusText: "Bluespace",
+  },
+};
 
 const ApcContent = (props, context) => {
   const { act, data } = useBackend(context);
@@ -63,6 +77,8 @@ const ApcContent = (props, context) => {
     || powerStatusMap[0];
   const chargingStatus = powerStatusMap[data.chargingStatus]
     || powerStatusMap[0];
+  const fuseStatus = fuseStatusMap[data.fuseStatus]
+    || fuseStatusMap[0];
   const channelArray = data.powerChannels || [];
   const malfStatus = malfMap[data.malfStatus] || malfMap[0];
   const adjustedCellChange = data.powerCellStatus / 100;
@@ -103,6 +119,18 @@ const ApcContent = (props, context) => {
                 onClick={() => act('charge')} />
             )}>
             [ {chargingStatus.chargingText} ]
+          </LabeledList.Item>
+          <LabeledList.Item
+            label="Fuse status"
+            color={fuseStatus.color}
+            buttons={data.fuseStatus === 2 && (
+              <Button
+                icon="sync"
+                content="Reload"
+                disabled={data.isOperating}
+                onClick={() => act('fuse')} />
+            )}>
+            [ {fuseStatus.statusText} ]
           </LabeledList.Item>
         </LabeledList>
       </Section>

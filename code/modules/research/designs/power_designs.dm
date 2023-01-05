@@ -57,6 +57,28 @@
 	build_path = /obj/item/stock_parts/cell/bluespace
 	category = list("Misc","Power")
 
+/datum/design/fuse
+	name = "Fuse"
+	desc = "Fuse."
+	id = "fuse"
+	req_tech = list("engineering" = 5, "powerstorage" = 4)
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 400, MAT_GLASS = 120)
+	construction_time=5
+	build_path = /obj/item/fuse
+	category = list("Power")
+
+/datum/design/bluespace_fuse
+	name = "Bluespace fuse"
+	desc = "Bluespace fuse."
+	id = "bluespace fuse"
+	req_tech = list("engineering" = 8, "powerstorage" = 6, "bluespace" = 6)
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 1000, MAT_GLASS = 250, MAT_GOLD = 100, MAT_BLUESPACE = 150)
+	construction_time=40
+	build_path = /obj/item/fuse/bluespace
+	category = list("Power")
+
 /datum/design/pacman
 	name = "Machine Board (PACMAN-type Generator)"
 	desc = "The circuit board that for a PACMAN-type portable generator."
