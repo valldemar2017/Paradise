@@ -212,10 +212,9 @@ LIGHTERS ARE IN LIGHTERS.DM
 
 /obj/item/clothing/mask/cigarette/proc/effect_smoke()
 	if(prob(15))
-		var/datum/effect_system/smoke_spread/chem_small/smoke = new
-		smoke.set_up(5, 0, src.loc)
-		smoke.start()
+		var/obj/effect/particle_effect/chem_smoke/small/smoke = new (get_turf(loc),"#FFF")
 		playsound(src.loc, 'sound/effects/space_wind.ogg', 50, 2)
+		spawn(60) qdel(smoke)
 
 
 /obj/item/clothing/mask/cigarette/proc/die()
